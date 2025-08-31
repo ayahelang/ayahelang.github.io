@@ -1,135 +1,631 @@
-<!DOCTYPE html>
-
-
-<html lang="en" class="light-style  customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="assets/"
-  data-template="vertical-menu-template-no-customizer">
-
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Silverhawk Network — Portal</title>
 
-  <title>Sneat - Free Bootstrap 5 HTML Admin Template</title>
+  <!-- Basic SEO -->
+  <meta name="description" content="Silverhawk Network portal — gateway to Web1..Web9" />
 
-  <meta name="description" content="" />
+  <!-- Styles (modern, responsive) -->
+  <style>
+    :root{
+      --bg:#071021;
+      --panel:#0b1220;
+      --accent:#6ee7b7;
+      --muted:#9aa9bf;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --neon: rgba(110,231,183,0.14);
+      --card: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --glass-border: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --ease: cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(12,40,80,0.45), transparent), 
+                  radial-gradient(900px 400px at 90% 90%, rgba(9,60,50,0.25), transparent),
+                  var(--bg);
+      color:#e6f0ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:scroll;
+      cursor: none; /* hide native cursor for custom one */
+    }
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
+    /* Layout */
+    .app{
+      display:flex;
+      min-height:100vh;
+      gap:18px;
+      padding:24px;
+    }
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet">
+    /* Sidebar */
+    .sidebar{
+      width:260px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);
+      border-radius:16px;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      backdrop-filter: blur(8px) saturate(120%);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      transition: transform .4s var(--ease);
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:10px;
+      background:linear-gradient(135deg,#0ea5a3,#6ee7b7);
+      display:grid;place-items:center;color:#012;
+      font-weight:700;font-size:18px;
+      box-shadow: 0 6px 18px rgba(110,231,183,0.08);
+    }
+    .brand h1{margin:0;font-size:15px;line-height:1}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/vendor/css/core.css" />
-  <link rel="stylesheet" href="assets/vendor/css/theme-default.css" />
-  <link rel="stylesheet" href="assets/css/demo.css" />
+    .nav{
+      display:flex;flex-direction:column;gap:8px;margin-top:6px;
+    }
+    .nav a{
+      display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;color:inherit;text-decoration:none;
+      transition: all .18s var(--ease);
+      border:1px solid transparent;
+    }
+    .nav a:hover{transform:translateX(6px);background:var(--glass-2);border-color:rgba(255,255,255,0.02)}
+    .nav a .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(180deg,#9be7d4,#3dbb94);box-shadow:0 4px 14px rgba(59,187,148,0.16)}
+    .toggle-btn{
+      margin-top:auto;display:flex;gap:10px;align-items:center;justify-content:center;padding:10px;border-radius:10px;background:transparent;border:1px dashed rgba(255,255,255,0.03);cursor:pointer;color:var(--muted)
+    }
+
+    /* Main content */
+    .main{
+      flex:1;
+      display:flex;flex-direction:column;gap:18px;
+      min-height:calc(100vh - 48px);
+    }
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--glass-border);
+    }
+    .topbar .title{font-size:18px;font-weight:600;display:flex;gap:8px;align-items:center}
+    .topbar .subtitle{color:var(--muted);font-size:13px}
+
+    /* Grid / slider of websites (3x3 thumbnails) */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      align-items:stretch;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;gap:8px;transition:transform .22s var(--ease), box-shadow .22s var(--ease);
+      min-height:160px;
+      overflow:hidden;
+    }
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 34px rgba(2,6,23,0.6)}
+    .thumb{
+      flex:1;border-radius:8px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      display:grid;place-items:center;font-weight:700;font-size:20px;color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+      position:relative;overflow:hidden;
+    }
+    .thumb::after{
+      content:'';position:absolute;inset:0;background:
+      linear-gradient(120deg, transparent 0%, rgba(0,0,0,0.08) 60%);
+      mix-blend-mode:overlay;
+    }
+    .card .label{display:flex;justify-content:space-between;align-items:center}
+    .card .label .name{font-weight:600}
+    .card .label .visit{font-size:13px;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+
+    /* Footer / game */
+    .game-wrap{
+      margin-top:12px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:var(--panel);
+      display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;
+    }
+    .game-header{display:flex;gap:12px;align-items:center}
+    .game-controls{display:flex;gap:8px}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .app{padding:12px}
+      .sidebar{width:64px;padding:10px;border-radius:12px}
+      .brand h1,.brand p,.nav a span.text{display:none}
+      .nav a{justify-content:center}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      .gallery{grid-template-columns:1fr;gap:12px}
+      .sidebar{display:none}
+    }
+
+    /* Subtle animated background elements */
+    .neon-orb{
+      position:fixed;right:6%;top:12%;width:160px;height:160px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, rgba(110,231,183,0.2), transparent 30%), linear-gradient(45deg, rgba(59,187,148,0.08), transparent);
+      filter:blur(22px);z-index:0;pointer-events:none;
+    }
+
+    /* Custom cursor */
+    #cursor{
+      position:fixed;left:0;top:0;width:34px;height:34px;border-radius:50%;transform:translate(-50%,-50%);
+      pointer-events:none;z-index:9999;mix-blend-mode:screen;
+      display:grid;place-items:center;
+      transition:width .12s var(--ease), height .12s var(--ease), transform .02s linear;
+      box-shadow: 0 6px 22px rgba(110,231,183,0.12), 0 0 10px rgba(110,231,183,0.06) inset;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(110,231,183,0.15));
+      border:1px solid rgba(110,231,183,0.28);
+    }
+    #cursor .star{
+      width:10px;height:10px;border-radius:2px;background:linear-gradient(180deg,#fff,#bff6dd);
+      transform:rotate(25deg);box-shadow:0 6px 14px rgba(110,231,183,0.18);
+    }
+    /* pointer trail */
+    .pointer-trail{
+      position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);
+      background:conic-gradient(rgba(110,231,183,0.6), rgba(110,231,183,0.1));
+      filter:blur(6px);mix-blend-mode:screen;pointer-events:none;z-index:9998;opacity:0.9;
+      transition: transform .08s linear;
+    }
+
+    /* small helper */
+    .muted{color:var(--muted);font-size:13px}
+  </style>
 </head>
-
 <body>
 
-  <!-- Content -->
-  <div class="container flex-grow-1 container-p-y my-2">
-    <h3>Thank you for using Sneat - Free Bootstrap 5 HTML Admin Template! 😇</h3>
-    <p>If you’re a developer looking for most Powerful & comprehensive Bootstrap 5 HTML Admin Dashboard Template built
-      for developers, rich with features, and highly customizable look no further than Sneat. We’ve followed the highest
-      industry standards to bring you the very best admin template that is not only fast and easy to use but highly
-      scalable. Offering ultimate convenience and flexibility, you’ll be able to build whatever application you want
-      with very little hassle.</p>
+  <div class="neon-orb" aria-hidden="true"></div>
 
-    <!-- Examples -->
-    <div class="row mt-sm-4 mt-3">
-      <div class="col-12 mb-3">
-        <div class="card">
-          <h5 class="card-header">Template Links</h5>
-          <!-- Template Demo Links -->
-          <table class="table">
-            <tbody>
-              <tr>
-                <th>Free Version</th>
-                <td><a href="html/index.html" target="_blank">Vertical Menu Template</a></td>
-              </tr>
-            </tbody>
-          </table>
-          <!--/ Template Demo Links -->
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">SH</div>
+        <div>
+          <h1>Silverhawk Network</h1>
+          <p>Portal • Web1..Web9</p>
         </div>
       </div>
 
-      <div class="col-12 mb-3">
-        <div class="card">
+      <nav class="nav" aria-label="main">
+        <a href="/index.html" title="Home (root)">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="text">Home</span>
+        </a>
 
-          <h5 class="card-header">Other Important Links</h5>
-          <!-- Other Links -->
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">URL</th>
-              </tr>
-            </thead>
-            <tbody>
+        <a href="#" id="open-portal" title="Open Portal">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="text">Portal</span>
+        </a>
 
-              <tr>
-                <td>License </td>
-                <td>
-                  <a href="https://themeselection.com/license/" target="_blank">https://themeselection.com/license/</a>
-                </td>
-              </tr>
+        <a href="#game" title="Game">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="text">Play</span>
+        </a>
 
-              <tr>
-                <td>Documentation</td>
-                <td>
-                  <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank">https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/</a>
-                </td>
-              </tr>
+        <a href="#" onclick="alert('Settings not implemented in this demo')" title="Settings">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="text">Settings</span>
+        </a>
+      </nav>
 
-              <tr>
-                <td>Changelog</td>
-                <td>
-                  <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template-free/changelog.html"
-                    target="_blank">https://themeselection.com/demo/sneat-bootstrap-html-admin-template-free/changelog.html</a>
-                </td>
-              </tr>
+      <button class="toggle-btn" id="collapseBtn" aria-label="Toggle sidebar">Collapse</button>
+    </aside>
 
-
-              <tr>
-                <td>GitHub Repository</td>
-                <td>
-                  <a href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    target="_blank">https://github.com/themeselection/sneat-html-admin-template-free</a>
-                </td>
-              </tr>
-
-
-              <tr>
-                <td>Support</td>
-                <td>
-                  <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank">https://github.com/themeselection/sneat-html-admin-template-free/issues</a>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-          <!--/ Other Links -->
+    <!-- Main -->
+    <main class="main" id="main">
+      <!-- Topbar -->
+      <div class="topbar">
+        <div>
+          <div class="title">Silverhawk Network <span style="font-size:12px;color:var(--muted)">— gateway to your sites</span></div>
+          <div class="subtitle">Click any card to open the site. Web1 → <code>/html/index.html</code></div>
+        </div>
+        <div>
+          <small class="muted">Status: <strong style="color:var(--accent)">Ready</strong></small>
         </div>
       </div>
 
-      <div class="col-12 mb-3">
-        <p>Looking for <strong>PRO</strong> version with <strong>Premium support</strong>?</p>
-        <div class="upgrade-to-pro">
-          <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/" target="_blank"
-            class="btn btn-danger">Upgrade to <strong>Sneat Pro</strong></a>
-        </div>
+      <!-- Gallery / 9 thumbnails -->
+      <section class="gallery" id="gallery" aria-label="web thumbnails">
+        <!-- 9 cards -->
+        <!-- Web1 must open /html/index.html -->
+        <article class="card">
+          <a class="thumb-link" href="/html/index.html" aria-label="Open Web1">
+            <div class="thumb">Web1<br><small class="muted">/html/index.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web1</div>
+            <a class="visit" href="/html/index.html">Open</a>
+          </div>
+        </article>
+
+        <!-- Web2..Web9 (placeholders pointing to /html/web2.html etc.) -->
+        <article class="card">
+          <a class="thumb-link" href="/html/web2.html" aria-label="Open Web2">
+            <div class="thumb">Web2<br><small class="muted">/html/web2.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web2</div>
+            <a class="visit" href="/html/web2.html">Open</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb-link" href="/html/web3.html" aria-label="Open Web3">
+            <div class="thumb">Web3<br><small class="muted">/html/web3.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web3</div>
+            <a class="visit" href="/html/web3.html">Open</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb-link" href="/html/web4.html" aria-label="Open Web4">
+            <div class="thumb">Web4<br><small class="muted">/html/web4.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web4</div>
+            <a class="visit" href="/html/web4.html">Open</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb-link" href="/html/web5.html" aria-label="Open Web5">
+            <div class="thumb">Web5<br><small class="muted">/html/web5.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web5</div>
+            <a class="visit" href="/html/web5.html">Open</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb-link" href="/html/web6.html" aria-label="Open Web6">
+            <div class="thumb">Web6<br><small class="muted">/html/web6.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web6</div>
+            <a class="visit" href="/html/web6.html">Open</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb-link" href="/html/web7.html" aria-label="Open Web7">
+            <div class="thumb">Web7<br><small class="muted">/html/web7.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web7</div>
+            <a class="visit" href="/html/web7.html">Open</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb-link" href="/html/web8.html" aria-label="Open Web8">
+            <div class="thumb">Web8<br><small class="muted">/html/web8.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web8</div>
+            <a class="visit" href="/html/web8.html">Open</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <a class="thumb-link" href="/html/web9.html" aria-label="Open Web9">
+            <div class="thumb">Web9<br><small class="muted">/html/web9.html</small></div>
+          </a>
+          <div class="label">
+            <div class="name">Web9</div>
+            <a class="visit" href="/html/web9.html">Open</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Small info / instructions -->
+      <div style="color:var(--muted);font-size:13px;padding:6px 2px">
+        Tip: kalau folder `html/` berisi file `index.html` dan file `web2.html` dst, klik kartu akan membuka file-file tersebut.
       </div>
-    </div>
+
+      <!-- Game area (Space Invaders mini) -->
+      <section id="game" class="game-wrap" aria-label="mini game">
+        <div class="game-header">
+          <strong style="font-size:16px">Mini Game — Silverhawk Defender</strong>
+          <div class="game-controls muted">Use ← → to move, Space to shoot</div>
+        </div>
+        <canvas id="gameCanvas" style="width:100%;max-width:1200px;height:360px;border-radius:10px;display:block"></canvas>
+        <div style="font-size:13px;color:var(--muted)">Score: <span id="score">0</span> • Lives: <span id="lives">3</span></div>
+        <div style="font-size:12px;color:var(--muted)">(Scroll sedikit untuk melihat — canvas responsif)</div>
+      </section>
+    </main>
   </div>
-  <!-- / Content -->
 
+  <!-- Custom cursor elements -->
+  <div id="cursor" aria-hidden="true"><div class="star"></div></div>
+  <div class="pointer-trail" id="trail" aria-hidden="true"></div>
+
+  <!-- Scripts -->
+  <script>
+    /********** UI: sidebar collapse **********/
+    (function(){
+      const sb = document.getElementById('sidebar');
+      const btn = document.getElementById('collapseBtn');
+      let collapsed = false;
+      btn.addEventListener('click', ()=>{
+        collapsed = !collapsed;
+        if(collapsed){
+          sb.style.transform = 'translateX(-220px)'; btn.textContent = 'Expand';
+        } else {
+          sb.style.transform = ''; btn.textContent = 'Collapse';
+        }
+      });
+
+      // open-portal scroll to gallery
+      document.getElementById('open-portal').addEventListener('click', (e)=>{
+        e.preventDefault();
+        document.getElementById('gallery').scrollIntoView({behavior:'smooth', block:'center'});
+      });
+    })();
+
+    /********** Custom cursor & trail (Star Trek vibe) **********/
+    (function(){
+      const cursor = document.getElementById('cursor');
+      const trail = document.getElementById('trail');
+      let mouseX = innerWidth/2, mouseY = innerHeight/2;
+      let trailX = mouseX, trailY = mouseY;
+
+      // show/hide logic
+      let visible = true;
+      document.addEventListener('mouseenter', ()=> { visible=true; cursor.style.display='grid'; trail.style.display='block'; });
+      document.addEventListener('mouseleave', ()=> { visible=false; cursor.style.display='none'; trail.style.display='none'; });
+
+      document.addEventListener('mousemove', (e)=>{
+        mouseX = e.clientX; mouseY = e.clientY;
+        cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        // pointer trail moves a bit delayed for orbit effect
+        trailX += (mouseX - trailX) * 0.16;
+        trailY += (mouseY - trailY) * 0.16;
+        trail.style.transform = `translate(${trailX}px, ${trailY}px)`;
+      });
+
+      // scale effect on interactive elements
+      const interactiveSelector = 'a,button,input,textarea,.thumb';
+      function setHoverHandlers(){
+        document.querySelectorAll(interactiveSelector).forEach(el=>{
+          el.addEventListener('mouseenter', ()=> {
+            cursor.style.width='48px'; cursor.style.height='48px';
+            cursor.style.boxShadow='0 14px 40px rgba(110,231,183,0.18)';
+          });
+          el.addEventListener('mouseleave', ()=> {
+            cursor.style.width='34px'; cursor.style.height='34px';
+            cursor.style.boxShadow='0 6px 22px rgba(110,231,183,0.12)';
+          });
+        });
+      }
+      setHoverHandlers();
+      // if DOM changes later, could re-call setHoverHandlers()
+
+    })();
+
+    /********** Simple Space Invaders (lightweight) **********/
+    (function(){
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+      let W = 900, H = 360;
+      function resize(){
+        // width limited to container width, keep pixel ratio
+        const rect = canvas.getBoundingClientRect();
+        W = Math.max(320, Math.floor(rect.width));
+        H = Math.max(240, Math.floor(rect.height));
+        canvas.width = W * devicePixelRatio;
+        canvas.height = H * devicePixelRatio;
+        canvas.style.height = rect.height + 'px';
+        ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // game state
+      let left=false, right=false, space=false;
+      let scoreEl = document.getElementById('score');
+      let livesEl = document.getElementById('lives');
+
+      // Player
+      const player = {x: W/2, y: H - 28, w:38, h:12, speed:6, bullets:[]};
+
+      // Enemies grid
+      let enemies = [];
+      let enemyRows = 3, enemyCols = 8, enemyGap = 8;
+      let enemyBullets = [];
+      let lives = 3, score = 0;
+
+      function spawnEnemies(){
+        enemies = [];
+        const ew = 28, eh = 16;
+        const totalW = enemyCols * ew + (enemyCols-1) * enemyGap;
+        let startX = (W - totalW)/2;
+        for(let r=0;r<enemyRows;r++){
+          for(let c=0;c<enemyCols;c++){
+            enemies.push({x:startX + c*(ew+enemyGap), y:40 + r*(eh+enemyGap), w:ew, h:eh, hp:1, row:r, col:c});
+          }
+        }
+      }
+      spawnEnemies();
+
+      // controls
+      window.addEventListener('keydown',(e)=>{
+        if(e.code==='ArrowLeft' || e.key==='ArrowLeft') left=true;
+        if(e.code==='ArrowRight' || e.key==='ArrowRight') right=true;
+        if(e.code==='Space') space=true;
+      });
+      window.addEventListener('keyup',(e)=>{
+        if(e.code==='ArrowLeft' || e.key==='ArrowLeft') left=false;
+        if(e.code==='ArrowRight' || e.key==='ArrowRight') right=false;
+        if(e.code==='Space') space=false;
+      });
+
+      // helpers
+      function rectsOverlap(a,b){
+        return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+      }
+
+      // main loop
+      let frame = 0, enemyDir = 1, enemySpeed = 0.4;
+      function step(){
+        frame++;
+        // move player
+        if(left) player.x -= player.speed;
+        if(right) player.x += player.speed;
+        player.x = Math.max(6, Math.min(W - player.w - 6, player.x));
+
+        // shoot
+        if(space && player.bullets.length < 3 && frame % 10 === 0){
+          player.bullets.push({x:player.x + player.w/2 - 2, y:player.y - 8, w:4, h:8, speed:8});
+        }
+
+        // update bullets
+        player.bullets.forEach(b=> b.y -= b.speed);
+        player.bullets = player.bullets.filter(b => b.y + b.h > -10);
+
+        // enemies movement (sweep)
+        let shiftDown = false;
+        let minX = Infinity, maxX = -Infinity;
+        enemies.forEach(e=>{ minX = Math.min(minX, e.x); maxX = Math.max(maxX, e.x + e.w); });
+        if(maxX > W - 12 && enemyDir === 1){ enemyDir = -1; shiftDown = true; }
+        if(minX < 12 && enemyDir === -1){ enemyDir = 1; shiftDown = true; }
+        enemies.forEach(e=>{
+          e.x += enemyDir * enemySpeed;
+          if(shiftDown) e.y += 12;
+        });
+
+        // enemy random shooting
+        if(frame % 40 === 0 && enemies.length){
+          let cand = enemies[Math.floor(Math.random()*enemies.length)];
+          enemyBullets.push({x:cand.x + cand.w/2 - 2, y:cand.y + cand.h + 4, w:4, h:8, speed:4});
+        }
+        enemyBullets.forEach(b=> b.y += b.speed);
+        enemyBullets = enemyBullets.filter(b=> b.y < H+20);
+
+        // collisions bullets -> enemies
+        for(let i = player.bullets.length-1; i>=0; i--){
+          const b = player.bullets[i];
+          for(let j = enemies.length-1; j>=0; j--){
+            const en = enemies[j];
+            if(rectsOverlap(b,en)){
+              // hit
+              player.bullets.splice(i,1);
+              enemies.splice(j,1);
+              score += 10;
+              break;
+            }
+          }
+        }
+
+        // enemy bullets -> player
+        for(let i = enemyBullets.length-1;i>=0;i--){
+          if(rectsOverlap(enemyBullets[i], {x:player.x, y:player.y, w:player.w, h:player.h})){
+            enemyBullets.splice(i,1);
+            lives--;
+            if(lives <= 0) resetGame();
+          }
+        }
+
+        // win condition
+        if(enemies.length === 0){
+          // next wave: increase speed, rows up to 5
+          enemyRows = Math.min(5, enemyRows + 1);
+          enemyCols = Math.min(10, enemyCols + 0); // keep same
+          enemySpeed *= 1.12;
+          spawnEnemies();
+        }
+
+        // render
+        render();
+
+        // update HUD
+        scoreEl.textContent = score;
+        livesEl.textContent = lives;
+
+        requestAnimationFrame(step);
+      }
+
+      function resetGame(){
+        lives = 3; score = 0; enemyRows = 3; enemyCols = 8; enemySpeed = 0.4;
+        player.bullets = []; enemyBullets = [];
+        spawnEnemies();
+      }
+
+      function drawRoundedRect(x,y,w,h,r){
+        ctx.beginPath();
+        ctx.moveTo(x+r,y);
+        ctx.arcTo(x+w,y,x+w,y+h,r);
+        ctx.arcTo(x+w,y+h,x,y+h,r);
+        ctx.arcTo(x,y+h,x,y,r);
+        ctx.arcTo(x,y,x+w,y,r);
+        ctx.closePath();
+      }
+
+      function render(){
+        ctx.clearRect(0,0,W,H);
+        // background grid
+        ctx.fillStyle = "rgba(255,255,255,0.02)";
+        for(let gx=0;gx<W;gx+=30) { ctx.fillRect(gx,0,0.6,H); }
+        // player
+        ctx.fillStyle = "#9be7d4";
+        drawRoundedRect(player.x, player.y, player.w, player.h, 4); ctx.fill();
+        // bullets
+        ctx.fillStyle = "#fff";
+        player.bullets.forEach(b => { drawRoundedRect(b.x,b.y,b.w,b.h,2); ctx.fill(); });
+        // enemies
+        enemies.forEach((e,i)=>{
+          // color row-based
+          const colors = ["#ff9aa2","#ffd3b6","#d5f4e6","#b5e7ff","#cbb2ff"];
+          ctx.fillStyle = colors[e.row % colors.length];
+          drawRoundedRect(e.x,e.y,e.w,e.h,4); ctx.fill();
+        });
+        // enemy bullets
+        ctx.fillStyle = "#ffd6a5";
+        enemyBullets.forEach(b => { drawRoundedRect(b.x,b.y,b.w,b.h,2); ctx.fill(); });
+
+        // HUD left
+        ctx.fillStyle = "rgba(255,255,255,0.06)";
+        ctx.font = "12px Inter, Arial";
+      }
+
+      // start loop
+      requestAnimationFrame(step);
+    })();
+
+    /********** Accessibility fallback: reveal cursor if user prefers default **********/
+    (function(){
+      try{
+        const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if(mq && mq.matches){
+          document.body.style.cursor = 'default';
+          document.getElementById('cursor').style.display = 'none';
+        }
+      }catch(e){}
+    })();
+
+    /********** Small enhancement: keyboard focus visible **********/
+    (function(){
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Tab') document.body.classList.add('show-focus');
+      });
+    })();
+  </script>
 </body>
-
 </html>
