@@ -1,124 +1,66 @@
-import React from "react";
-import { motion } from "framer-motion";
-
-export default function TermsOfServicePage() {
-  const company = "[Nama Bisnis Anda]";
-  const email = "contact@domainanda.com";
-  const lastUpdated = "October 4, 2025";
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-4 sm:p-8 md:p-12 font-sans">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden"
-      >
-        <header className="px-6 py-10 bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Terms of Service</h1>
-              <p className="mt-1 text-sm md:text-base opacity-90">{company} — Last updated {lastUpdated}</p>
-            </div>
-            <nav className="flex flex-wrap gap-4 text-sm md:text-base font-medium">
-              <a href="#toc" className="hover:underline">Contents</a>
-              <a href="#contact" className="hover:underline">Contact</a>
-              <a href="#privacy" className="hover:underline">Privacy Policy</a>
-            </nav>
-          </div>
-        </header>
-
-        <main className="grid md:grid-cols-4 gap-6 p-6 md:p-10">
-          <aside className="md:col-span-1 hidden md:block">
-            <div className="sticky top-10">
-              <div className="bg-gray-50 p-5 rounded-2xl border border-gray-200 shadow-sm">
-                <h3 className="font-semibold mb-3 text-gray-700">Daftar Isi</h3>
-                <ol className="text-sm space-y-2 leading-6 text-gray-600">
-                  <li><a href="#intro" className="hover:text-sky-600 transition">1. Pengenalan</a></li>
-                  <li><a href="#use" className="hover:text-sky-600 transition">2. Penggunaan Layanan</a></li>
-                  <li><a href="#affiliate" className="hover:text-sky-600 transition">3. Affiliate & Referral</a></li>
-                  <li><a href="#content" className="hover:text-sky-600 transition">4. Konten & Hak Cipta</a></li>
-                  <li><a href="#liability" className="hover:text-sky-600 transition">5. Batas Tanggung Jawab</a></li>
-                  <li><a href="#termination" className="hover:text-sky-600 transition">6. Pengakhiran</a></li>
-                  <li><a href="#law" className="hover:text-sky-600 transition">7. Hukum yang Berlaku</a></li>
-                  <li><a href="#contact" className="hover:text-sky-600 transition">8. Kontak</a></li>
-                </ol>
-              </div>
-            </div>
-          </aside>
-
-          <section className="md:col-span-3 prose prose-slate max-w-none text-justify">
-            <article id="intro">
-              <h2>Pengenalan</h2>
-              <p>
-                Selamat datang di layanan {company}. Dengan mengakses atau menggunakan layanan ini, Anda menyetujui syarat dan ketentuan yang tercantum di halaman ini. Jika Anda tidak setuju, mohon jangan menggunakan layanan kami.
-              </p>
-            </article>
-
-            <article id="use">
-              <h2>Penggunaan Layanan</h2>
-              <p>
-                Layanan ini disediakan untuk tujuan edukasi, pelatihan, dan promosi alat/produk digital. Anda setuju untuk tidak menggunakan layanan ini untuk tujuan ilegal, spam, atau merugikan pihak lain. Kami memiliki hak untuk menangguhkan akun atau akses yang melanggar kebijakan kami.
-              </p>
-            </article>
-
-            <article id="affiliate">
-              <h2>Affiliate & Referral</h2>
-              <p>
-                Jika Anda bergabung melalui link afiliator atau referral, ketentuan program afiliasi yang bersangkutan akan berlaku. Kami berhak memberikan, menunda, atau membatalkan komisi sesuai dengan kebijakan penyelenggara program (mis. PartnerStack, Webflow, SGBVA).
-              </p>
-              <p>
-                Semua klaim komisi harus mengikuti aturan program afiliasi pihak ketiga. {company} hanya memfasilitasi promosi dan tidak bertanggung jawab atas keputusan atau pembayaran pihak ketiga.
-              </p>
-            </article>
-
-            <article id="content">
-              <h2>Konten & Hak Cipta</h2>
-              <p>
-                Semua materi, artikel, video, dan sumber daya yang dipublikasikan oleh {company} dilindungi oleh hak cipta kecuali dinyatakan lain. Anda boleh menggunakan materi untuk keperluan pribadi atau pendidikan, dengan memberikan kredit yang sesuai. Penggunaan komersial memerlukan izin tertulis.
-              </p>
-            </article>
-
-            <article id="liability">
-              <h2>Batas Tanggung Jawab</h2>
-              <p>
-                Informasi yang disediakan bersifat edukasional dan bukan nasihat profesional tertentu. {company} tidak bertanggung jawab atas kerugian langsung, tidak langsung, atau konsekuensi yang timbul dari penggunaan informasi di situs ini.
-              </p>
-            </article>
-
-            <article id="termination">
-              <h2>Pengakhiran</h2>
-              <p>
-                Kami dapat menghentikan akses ke layanan kapan saja jika terjadi pelanggaran terhadap ketentuan ini atau kebijakan lain yang berlaku.
-              </p>
-            </article>
-
-            <article id="law">
-              <h2>Hukum yang Berlaku</h2>
-              <p>
-                Ketentuan ini diatur oleh hukum Republik Indonesia. Sengketa akan diselesaikan secara musyawarah; jika gagal, akan diselesaikan melalui jalur hukum yang berlaku.
-              </p>
-            </article>
-
-            <article id="contact">
-              <h2>Kontak</h2>
-              <p>
-                Jika Anda memiliki pertanyaan tentang Terms of Service ini, silakan hubungi kami di <a href={`mailto:${email}`} className="text-sky-600 hover:underline">{email}</a>.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a href="#" className="inline-block px-5 py-2 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-100 transition">Download PDF</a>
-                <a href="#privacy" className="inline-block px-5 py-2 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Lihat Privacy Policy</a>
-              </div>
-            </article>
-
-            <footer className="mt-12 pt-6 border-t text-sm text-gray-600">
-              <p>Dengan melanjutkan, Anda menyetujui Terms of Service ini.</p>
-              <p className="mt-2">Last updated: {lastUpdated}</p>
-            </footer>
-          </section>
-        </main>
-      </motion.div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service - Silverhawk Network Sawangan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Header -->
+  <header class="bg-black text-white p-6">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <img src="images/logosilverhawk.png" alt="Silverhawk Logo" class="h-12">
+      <h1 class="text-xl font-bold">Silverhawk Network Sawangan</h1>
     </div>
-  );
-}
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-red-600 to-black text-white py-16 px-6 text-center">
+    <h2 class="text-3xl md:text-5xl font-bold mb-4">Terms of Service</h2>
+    <p class="text-gray-200">Last Updated: October 4, 2025</p>
+  </section>
+
+  <!-- Content -->
+  <main class="max-w-4xl mx-auto py-12 px-6 space-y-8">
+    <section>
+      <h3 class="text-2xl font-semibold mb-2">1. Acceptance of Terms</h3>
+      <p>
+        By accessing or using our services, you agree to be bound by these Terms of Service.
+        If you do not agree, please discontinue use immediately.
+      </p>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold mb-2">2. Use of Services</h3>
+      <p>
+        You agree to use our services only for lawful purposes and in compliance with all applicable laws.
+      </p>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold mb-2">3. Privacy Policy</h3>
+      <p>
+        Your use of our services is also governed by our Privacy Policy, which explains how we collect and use your data.
+      </p>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold mb-2">4. Contact Information</h3>
+      <p>
+        If you have any questions about these Terms, please contact us at:
+      </p>
+      <ul class="list-disc pl-6 mt-2">
+        <li>Email: <a href="mailto:admin@silverhawk.web.id" class="text-red-600 hover:underline">admin@silverhawk.web.id</a></li>
+        <li>Website: <a href="https://silverhawk.web.id" class="text-red-600 hover:underline">https://silverhawk.web.id</a></li>
+        <li>WhatsApp: <a href="https://wa.me/6285159922358" class="text-red-600 hover:underline">+62 851 5992 2358</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-6 text-center">
+    <p>&copy; 2025 Silverhawk Network Sawangan. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
