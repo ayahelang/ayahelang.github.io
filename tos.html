@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function TermsOfServicePage() {
   const company = "[Nama Bisnis Anda]";
@@ -6,16 +7,21 @@ export default function TermsOfServicePage() {
   const lastUpdated = "October 4, 2025";
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-12">
-      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden">
-        <header className="px-6 py-8 bg-gradient-to-r from-sky-500 to-indigo-600 text-white">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-4 sm:p-8 md:p-12 font-sans">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.6 }}
+        className="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl overflow-hidden"
+      >
+        <header className="px-6 py-10 bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-2xl md:text-3xl font-semibold">Terms of Service</h1>
-              <p className="mt-1 text-sm opacity-90">{company} — Last updated {lastUpdated}</p>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Terms of Service</h1>
+              <p className="mt-1 text-sm md:text-base opacity-90">{company} — Last updated {lastUpdated}</p>
             </div>
-            <nav className="space-x-4 text-sm opacity-95 hidden md:block">
-              <a href="#toc" className="hover:underline">Table of contents</a>
+            <nav className="flex flex-wrap gap-4 text-sm md:text-base font-medium">
+              <a href="#toc" className="hover:underline">Contents</a>
               <a href="#contact" className="hover:underline">Contact</a>
               <a href="#privacy" className="hover:underline">Privacy Policy</a>
             </nav>
@@ -24,24 +30,24 @@ export default function TermsOfServicePage() {
 
         <main className="grid md:grid-cols-4 gap-6 p-6 md:p-10">
           <aside className="md:col-span-1 hidden md:block">
-            <div className="sticky top-6">
-              <div className="bg-gray-50 p-4 rounded-xl border">
-                <h3 className="font-semibold mb-3">Daftar Isi</h3>
-                <ol className="text-sm space-y-2 leading-6">
-                  <li><a href="#intro" className="hover:text-sky-600">1. Pengenalan</a></li>
-                  <li><a href="#use" className="hover:text-sky-600">2. Penggunaan Layanan</a></li>
-                  <li><a href="#affiliate" className="hover:text-sky-600">3. Affiliate & Referral</a></li>
-                  <li><a href="#content" className="hover:text-sky-600">4. Konten & Hak Cipta</a></li>
-                  <li><a href="#liability" className="hover:text-sky-600">5. Batas Tanggung Jawab</a></li>
-                  <li><a href="#termination" className="hover:text-sky-600">6. Pengakhiran</a></li>
-                  <li><a href="#law" className="hover:text-sky-600">7. Hukum yang Berlaku</a></li>
-                  <li><a href="#contact" className="hover:text-sky-600">8. Kontak</a></li>
+            <div className="sticky top-10">
+              <div className="bg-gray-50 p-5 rounded-2xl border border-gray-200 shadow-sm">
+                <h3 className="font-semibold mb-3 text-gray-700">Daftar Isi</h3>
+                <ol className="text-sm space-y-2 leading-6 text-gray-600">
+                  <li><a href="#intro" className="hover:text-sky-600 transition">1. Pengenalan</a></li>
+                  <li><a href="#use" className="hover:text-sky-600 transition">2. Penggunaan Layanan</a></li>
+                  <li><a href="#affiliate" className="hover:text-sky-600 transition">3. Affiliate & Referral</a></li>
+                  <li><a href="#content" className="hover:text-sky-600 transition">4. Konten & Hak Cipta</a></li>
+                  <li><a href="#liability" className="hover:text-sky-600 transition">5. Batas Tanggung Jawab</a></li>
+                  <li><a href="#termination" className="hover:text-sky-600 transition">6. Pengakhiran</a></li>
+                  <li><a href="#law" className="hover:text-sky-600 transition">7. Hukum yang Berlaku</a></li>
+                  <li><a href="#contact" className="hover:text-sky-600 transition">8. Kontak</a></li>
                 </ol>
               </div>
             </div>
           </aside>
 
-          <section className="md:col-span-3 prose prose-slate max-w-none">
+          <section className="md:col-span-3 prose prose-slate max-w-none text-justify">
             <article id="intro">
               <h2>Pengenalan</h2>
               <p>
@@ -97,22 +103,22 @@ export default function TermsOfServicePage() {
             <article id="contact">
               <h2>Kontak</h2>
               <p>
-                Jika Anda memiliki pertanyaan tentang Terms of Service ini, silakan hubungi kami di <a href={`mailto:${email}`}>{email}</a>.
+                Jika Anda memiliki pertanyaan tentang Terms of Service ini, silakan hubungi kami di <a href={`mailto:${email}`} className="text-sky-600 hover:underline">{email}</a>.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href="#" className="inline-block px-4 py-2 rounded-lg border font-medium hover:bg-gray-100">Download PDF</a>
-                <a href="#privacy" className="inline-block px-4 py-2 rounded-lg bg-sky-600 text-white font-semibold hover:opacity-95">Lihat Privacy Policy</a>
+                <a href="#" className="inline-block px-5 py-2 rounded-xl border border-gray-300 text-gray-700 font-medium hover:bg-gray-100 transition">Download PDF</a>
+                <a href="#privacy" className="inline-block px-5 py-2 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Lihat Privacy Policy</a>
               </div>
             </article>
 
-            <footer className="mt-10 text-sm text-gray-600">
+            <footer className="mt-12 pt-6 border-t text-sm text-gray-600">
               <p>Dengan melanjutkan, Anda menyetujui Terms of Service ini.</p>
               <p className="mt-2">Last updated: {lastUpdated}</p>
             </footer>
           </section>
         </main>
-      </div>
+      </motion.div>
     </div>
   );
 }
