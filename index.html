@@ -1,169 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Silverhawk Network — Portal</title>
-<meta name="description" content="Silverhawk Network portal — gateway to Web Portfolio">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Silverhawk Network — Portal to Our Services</title>
+<meta name="description" content="Silverhawk Network portal — centralized access to all digital services including JasaWeb, Boom Pesantren, WebGallery, WebTools and more.">
 
 <link rel="canonical" href="https://silverhawk.web.id/">
-<link rel="stylesheet" href="style.css">
 
+<!-- Open Graph -->
+<meta property="og:title" content="Silverhawk Network — Portal">
+<meta property="og:description" content="Access all Silverhawk digital services from one portal.">
+<meta property="og:url" content="https://silverhawk.web.id/">
+<meta property="og:type" content="website">
+
+<!-- Robots -->
+<meta name="robots" content="index, follow">
+
+<link rel="stylesheet" href="css/style.css" />
+
+<!-- Analytics -->
 <script src="https://analytics.ahrefs.com/analytics.js" data-key="zk+BdmpvtvG+OduckNU6FQ" async></script>
 
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Silverhawk Web",
+  "name": "Silverhawk Network",
   "url": "https://silverhawk.web.id",
-  "logo": "https://silverhawk.web.id/logo.png"
+  "logo": "https://silverhawk.web.id/logo.png",
+  "sameAs": [
+    "https://jasaweb.silverhawk.web.id",
+    "https://boompesantren.silverhawk.web.id",
+    "https://webgal.silverhawk.web.id"
+  ]
 }
 </script>
+
 </head>
 
 <body>
 
-<div class="neon-orb"></div>
+<div class="bg-blur"></div>
 
-<div class="app">
+<div class="layout">
 
-<aside class="sidebar" id="sidebar">
-  <div class="brand">
-    <div class="logo">SH</div>
-    <div>
-      <h1>Silverhawk Network</h1>
-      <p>Portal • WebPortfolio</p>
-    </div>
-  </div>
+<aside class="sidebar">
+<div class="logo">
+<div class="logo-circle">SH</div>
+<div>
+<h2>Silverhawk Network</h2>
+<span>Portal to Our Services</span>
+</div>
+</div>
 
-  <nav class="nav">
-    <a href="/index.html"><span class="dot"></span><span class="text">Home</span></a>
-    <a href="#" id="open-portal"><span class="dot"></span><span class="text">Portal</span></a>
-    <a href="#game"><span class="dot"></span><span class="text">Play</span></a>
-  </nav>
-
-  <button class="toggle-btn" id="collapseBtn">Collapse</button>
+<nav>
+<a href="https://silverhawk.web.id" class="active">Dashboard</a>
+<a href="https://silverhawk.web.id/html/index.html">WebTools</a>
+<a href="https://silverhawk.web.id/raptor">Playground</a>
+</nav>
 </aside>
 
 <main class="main">
 
-<div class="topbar">
-  <div>
-    <div class="title">Silverhawk Network</div>
-    <div class="subtitle">Gateway to your web projects</div>
-  </div>
-  <small class="muted">Status: <strong class="ready">Ready</strong></small>
+<header class="header">
+<div>
+<h1>Silverhawk Network</h1>
+<p>Your Digital Service Ecosystem</p>
 </div>
+<div class="status">
+<span class="dot"></span> System Ready
+</div>
+</header>
 
-<section class="gallery" id="gallery">
+<section class="cards">
 
-<!-- 9 CARDS -->
-<article class="card">
-<a class="thumb-link" href="/html/index.html">
-<div class="thumb">Web Component Demo</div>
+<a href="https://jasaweb.silverhawk.web.id" target="_blank" class="card">
+<h3>JasaWeb</h3>
+<p>Professional Website Design Services</p>
+<button>Enter</button>
 </a>
-<div class="label">
-<div class="name">Web Component Demo</div>
-<a class="visit" href="/html/index.html">Open</a>
-</div>
-</article>
 
-<article class="card">
-<a class="thumb-link" href="https://silverhawk.web.id/raptor">
-<div class="thumb">Raptor</div>
+<a href="https://boompesantren.silverhawk.web.id" target="_blank" class="card">
+<h3>Boom Pesantren</h3>
+<p>Digital Transformation for Traditional Islamic Schools</p>
+<button>Enter</button>
 </a>
-<div class="label">
-<div class="name">Raptor</div>
-<a class="visit" href="https://silverhawk.web.id/raptor">Open</a>
-</div>
-</article>
 
-<article class="card">
-<a class="thumb-link" href="https://webgal.silverhawk.web.id">
-<div class="thumb">WebGallery</div>
+<a href="https://webgal.silverhawk.web.id/" target="_blank" class="card">
+<h3>WebGallery</h3>
+<p>Media & Portfolio Display System</p>
+<button>Enter</button>
 </a>
-<div class="label">
-<div class="name">WebGallery</div>
-<a class="visit" href="https://webgal.silverhawk.web.id">Open</a>
-</div>
-</article>
 
-<article class="card">
-<a class="thumb-link" href="https://silverhawk.web.id/webtools/">
-<div class="thumb">WebTools</div>
+<a href="https://dewaytukangtaman.com/" target="_blank" class="card">
+<h3>Deway Tukang Taman</h3>
+<p>Professional Landscaping Services</p>
+<button>Enter</button>
 </a>
-<div class="label">
-<div class="name">WebTools</div>
-<a class="visit" href="https://silverhawk.web.id/webtools/">Open</a>
-</div>
-</article>
 
-<article class="card">
-<a class="thumb-link" href="https://jasaweb.silverhawk.web.id">
-<div class="thumb">Jasa Web</div>
+<a href="https://educate.silverhawk.web.id/" target="_blank" class="card">
+<h3>Online Study</h3>
+<p>Learning & Education Platform</p>
+<button>Enter</button>
 </a>
-<div class="label">
-<div class="name">Jasa Web</div>
-<a class="visit" href="https://jasaweb.silverhawk.web.id">Open</a>
-</div>
-</article>
 
-<article class="card">
-<a class="thumb-link" href="https://dewaytukangtaman.com/">
-<div class="thumb">Deway Tukang Taman</div>
+<a href="https://travel.silverhawk.web.id/" target="_blank" class="card">
+<h3>Travel Portal</h3>
+<p>Travel & Booking Services</p>
+<button>Enter</button>
 </a>
-<div class="label">
-<div class="name">Deway Tukang Taman</div>
-<a class="visit" href="https://dewaytukangtaman.com/">Open</a>
-</div>
-</article>
 
-<article class="card">
-<a class="thumb-link" href="https://educate.silverhawk.web.id">
-<div class="thumb">Online Study</div>
-</a>
-<div class="label">
-<div class="name">Online Study</div>
-<a class="visit" href="https://educate.silverhawk.web.id">Open</a>
-</div>
-</article>
-
-<article class="card">
-<a class="thumb-link" href="https://rumah.silverhawk.web.id">
-<div class="thumb">Rumah</div>
-</a>
-<div class="label">
-<div class="name">Rumah</div>
-<a class="visit" href="https://rumah.silverhawk.web.id">Open</a>
-</div>
-</article>
-  
-<article class="card">
-<a class="thumb-link" href="https://travel.silverhawk.web.id">
-<div class="thumb">Travel</div>
-</a>
-<div class="label">
-<div class="name">Rumah</div>
-<a class="visit" href="https://travel.silverhawk.web.id">Open</a>
-</div>
-</article>
-
-</section>
-
-<section id="game" class="game-wrap">
-<strong>Mini Game — Silverhawk Defender</strong>
-<canvas id="gameCanvas"></canvas>
-<div>Score: <span id="score">0</span> • Lives: <span id="lives">3</span></div>
 </section>
 
 </main>
 </div>
 
-<div id="cursor"><div class="star"></div></div>
-<div id="trail" class="pointer-trail"></div>
-
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
