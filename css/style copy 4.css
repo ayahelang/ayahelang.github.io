@@ -73,7 +73,6 @@ body {
 
 .sidebar nav a {
     display: block;
-    cursor: pointer;
     padding: 12px 15px;
     margin-bottom: 10px;
     border-radius: 8px;
@@ -82,15 +81,10 @@ body {
     transition: .3s;
 }
 
-.sidebar nav a:hover {
-    transform: translateX(4px);
-}
-
 .sidebar nav a:hover,
 .sidebar nav a.active {
-    background: rgba(0, 245, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
     color: #00f5ff;
-    box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
 }
 
 .main {
@@ -102,12 +96,6 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;
-    align-items: center;
-}
-
-.header h1 {
-    font-size: 28px;
-    font-weight: 600;
 }
 
 .status {
@@ -261,8 +249,6 @@ body {
 .timeline {
     position: relative;
     padding-left: 30px;
-    margin-top: 50px;
-    border-left: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .timeline-item {
@@ -276,13 +262,9 @@ body {
     background: #00f5ff;
     border-radius: 50%;
     position: absolute;
-    left: -7px;
-    top: 6px;
+    left: -6px;
+    top: 5px;
     box-shadow: 0 0 10px #00f5ff;
-}
-
-.timeline-content {
-    margin-left: 17px;
 }
 
 .expand-content {
@@ -293,9 +275,9 @@ body {
 }
 
 .expand-btn {
-    margin-top: 5px;
-    padding: 3px 5px;
-    font-size: 8px;
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -352,6 +334,33 @@ body {
     transition: 1s ease;
 }
 
+.timeline {
+    margin-top: 50px;
+    padding-left: 25px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: #00f5ff;
+    border-radius: 50%;
+    position: absolute;
+    left: -7px;
+    top: 6px;
+}
+
+.expand-content {
+    display: none;
+    margin-top: 10px;
+    color: #bbb;
+}
+
 .certifications {
     margin-top: 60px;
 }
@@ -385,22 +394,6 @@ body.light .badge {
     top: -200px;
     right: -200px;
     z-index: -1;
-}
-
-#themeToggle {
-    margin-top: 20px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 8px;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: #ccc;
-    cursor: pointer;
-    transition: .3s;
-}
-
-#themeToggle:hover {
-    background: rgba(255, 255, 255, 0.2);
 }
 
 @media(max-width:768px) {
