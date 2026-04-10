@@ -53,14 +53,6 @@ menuLinks.forEach(link => {
     });
 });
 
-
-// Skill animation
-document.querySelectorAll(".bar div").forEach(bar => {
-    setTimeout(() => {
-        bar.style.width = bar.dataset.width;
-    }, 500);
-});
-
 // Typing animation
 const text = "Miscellaneous Skills";
 let index = 0;
@@ -78,12 +70,12 @@ counter = document.getElementById("yearCounter"); let counterInterval = setInter
 
 // Skill animation
 function animateSkills() {
-    document.querySelectorAll("#about .bar div").forEach(bar => {
-        bar.style.width = "0"; // reset dulu
+    document.querySelectorAll("#about .bar div").forEach((bar, i) => {
+        bar.style.width = "0";
 
         setTimeout(() => {
             bar.style.width = bar.dataset.width;
-        }, 200);
+        }, 200 + (i * 200)); // delay berurutan
     });
 }
 
