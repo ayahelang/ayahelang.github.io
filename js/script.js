@@ -120,3 +120,24 @@ window.scrollTo({
     top: 0,
     behavior: "smooth"
 });
+
+// Disable klik kanan
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Disable shortcut inspect
+document.addEventListener("keydown", function (e) {
+    if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key)) ||
+        (e.ctrlKey && e.key === "U")
+    ) {
+        e.preventDefault();
+    }
+});
+
+setInterval(() => {
+    if (window.outerWidth - window.innerWidth > 160 ||
+        window.outerHeight - window.innerHeight > 160) {
+        document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:20%'>Access Denied</h1>";
+    }
+}, 1000);

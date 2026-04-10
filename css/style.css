@@ -571,3 +571,18 @@ body.light .badge {
     font-size: 10px;
   }
 }
+
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
+body::after {
+  content: "© Silverhawk Network";
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  opacity: 0.05;
+  font-size: 20px;
+  pointer-events: none;
+}
