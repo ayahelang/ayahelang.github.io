@@ -38,6 +38,12 @@ menuLinks.forEach(link => {
 
         title.textContent = link.textContent;
 
+        if (target === "about") {
+            setTimeout(() => {
+                animateSkills();
+            }, 300);
+        }
+
         // scroll atas
         window.scrollTo({
             top: 0,
@@ -71,11 +77,15 @@ counter = document.getElementById("yearCounter"); let counterInterval = setInter
 }, 80);
 
 // Skill animation
-document.querySelectorAll(".bar div").forEach(bar => {
-    setTimeout(() => {
-        bar.style.width = bar.dataset.width;
-    }, 500);
-});
+function animateSkills() {
+    document.querySelectorAll("#about .bar div").forEach(bar => {
+        bar.style.width = "0"; // reset dulu
+
+        setTimeout(() => {
+            bar.style.width = bar.dataset.width;
+        }, 200);
+    });
+}
 
 // Expandable timeline
 document.querySelectorAll(".expand-btn").forEach(btn => {
