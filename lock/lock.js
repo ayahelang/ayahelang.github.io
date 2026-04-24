@@ -1,4 +1,4 @@
-function() {
+(function () {
 
     const __shlk9x_links = [
         "https://www.tiktok.com/@enb.electronicsntools",
@@ -119,4 +119,4 @@ box - shadow: 0 10px 25px rgba(0, 0, 0, .25)
         __shlk9x_makeBtn
     );
 
-}) ();
+})();
