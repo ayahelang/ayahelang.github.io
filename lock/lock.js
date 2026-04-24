@@ -1,76 +1,122 @@
-```javascript id="z7w1mq"
-/* Silverhawk Universal Lock JS */
+function() {
 
-(function(){
+    const __shlk9x_links = [
+        "https://www.tiktok.com/@enb.electronicsntools",
+        "https://www.tiktok.com/@belajarsmm",
+        "https://www.youtube.com/@amateursreleased",
+        "https://www.instagram.com/jameswhat.sgbva",
+        "https://www.instagram.com/teddyskom63",
+        "https://www.facebook.com/teddymulyana.sgbva/"
+    ];
 
-const allowedHosts = [
-  "silverhawk.web.id",
-  "www.silverhawk.web.id",
-  "localhost",
-  "127.0.0.1"
-];
+    let __shlk9x_lastOpen = 0;
+    let __shlk9x_tryCount = 0;
 
-/* klik kanan */
-document.addEventListener("contextmenu", e=>{
-  e.preventDefault();
-});
+    function __shlk9x_pick() {
+        return __shlk9x_links[
+            Math.floor(Math.random() * __shlk9x_links.length)
+        ];
+    }
 
-/* shortcut inspect */
-document.addEventListener("keydown", e=>{
-  const k = e.key.toUpperCase();
+    function __shlk9x_toast(msg) {
 
-  if(
-    k === "F12" ||
-    (e.ctrlKey && e.shiftKey && ["I","J","C","K"].includes(k)) ||
-    (e.ctrlKey && ["U","S","P"].includes(k))
-  ){
-    e.preventDefault();
-    return false;
-  }
-});
+        let el = document.getElementById("__shlk9x_toast");
 
-/* drag */
-document.addEventListener("dragstart", e=>{
-  e.preventDefault();
-});
+        if (!el) {
+            el = document.createElement("div");
+            el.id = "__shlk9x_toast";
 
-/* select */
-document.addEventListener("selectstart", e=>{
-  e.preventDefault();
-});
-
-/* anti iframe */
-if(window.top !== window.self){
-  document.body.innerHTML = "Embedding blocked.";
-}
-
-/* devtools detect */
-setInterval(()=>{
-  const w = window.outerWidth - window.innerWidth > 170;
-  const h = window.outerHeight - window.innerHeight > 170;
-
-  if(w || h){
-    console.clear();
-    document.body.innerHTML = `
-      <div style="
-      padding:40px;
-      text-align:center;
-      font-family:Arial">
-      <h2>Developer Tools Detected</h2>
-      <p>Access closed.</p>
-      </div>
+            el.style.cssText = `
+position: fixed;
+left: 50 %;
+bottom: 18px;
+transform: translateX(-50 %);
+background:#111;
+color: #fff;
+padding: 10px 16px;
+border - radius: 12px;
+z - index: 999999;
+font - family: Arial;
+font - size: 14px;
+box - shadow: 0 10px 25px rgba(0, 0, 0, .25)
     `;
-  }
-},1500);
 
-/* branding console */
-console.log("%cSTOP","color:red;font-size:42px;font-weight:bold");
-console.log("Protected by Silverhawk Network");
+            document.body.appendChild(el);
+        }
 
-/* ping */
-setInterval(()=>{
- localStorage.setItem("silverhawk_lock_ping", Date.now());
-},5000);
+        el.textContent = msg;
+        el.style.display = "block";
 
-})();
-```
+        clearTimeout(el.__hideTimer);
+
+        el.__hideTimer = setTimeout(() => {
+            el.style.display = "none";
+        }, 2200);
+    }
+
+    function __shlk9x_trigger(src) {
+
+        __shlk9x_tryCount++;
+
+        __shlk9x_toast("Konten dilindungi 😊");
+
+        const now = Date.now();
+
+        if (now - __shlk9x_lastOpen > 15000) {
+            __shlk9x_lastOpen = now;
+            window.open(__shlk9x_pick(), "_blank", "noopener");
+        }
+
+        console.log("LOCK:", src);
+    }
+
+    document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        __shlk9x_trigger("rightclick");
+    });
+
+    document.addEventListener("keydown", function (e) {
+
+        const k = e.key.toUpperCase();
+
+        if (
+            k === "F12" ||
+            (e.ctrlKey && e.shiftKey &&
+                ["I", "J", "C", "K"].includes(k)) ||
+            (e.ctrlKey &&
+                ["U", "S"].includes(k))
+        ) {
+            e.preventDefault();
+            __shlk9x_trigger("shortcut");
+        }
+
+    });
+
+    document.addEventListener(
+        "dragstart",
+        e => e.preventDefault()
+    );
+
+    document.addEventListener(
+        "selectstart",
+        e => e.preventDefault()
+    );
+
+    function __shlk9x_makeBtn() {
+
+        const a = document.createElement("a");
+
+        a.href = __shlk9x_pick();
+        a.target = "_blank";
+        a.className = "__shlk9x_follow_btn";
+        a.innerHTML = "📣 Follow Us";
+
+        document.body.appendChild(a);
+    }
+
+    window.addEventListener(
+        "load",
+        __shlk9x_makeBtn
+    );
+
+}) ();
