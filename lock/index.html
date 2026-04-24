@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>LOCK Setup Guide</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: #0f172a;
+            color: #e5e7eb;
+            line-height: 1.6
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: auto;
+            padding: 24px
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 18px;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .25)
+        }
+
+        h1,
+        h2 {
+            margin: .2rem 0 1rem
+        }
+
+        .small {
+            opacity: .75;
+            font-size: .95rem
+        }
+
+        code,
+        pre {
+            font-family: Consolas, monospace
+        }
+
+        pre {
+            background: #020617;
+            padding: 16px;
+            border-radius: 14px;
+            overflow: auto;
+            border: 1px solid #334155;
+            position: relative
+        }
+
+        .btn {
+            background: #0ea5e9;
+            color: #fff;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        .copy {
+            position: absolute;
+            top: 10px;
+            right: 10px
+        }
+
+        .tag {
+            display: inline-block;
+            background: #1d4ed8;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: .85rem;
+            margin-right: 8px
+        }
+
+        ul {
+            padding-left: 18px
+        }
+
+        a {
+            color: #38bdf8
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>🔒 Silverhawk Lock Guide</h1>
+        <p class="small">Panduan cepat memasang lock.css dan lock.js ke semua website HTML/CSS/JS Anda.</p>
+
+        <div class="card">
+            <h2>1. Simpan File di Server</h2>
+            <p>Letakkan file berikut di folder:</p>
+            <p><span class="tag">/lock/lock.css</span> <span class="tag">/lock/lock.js</span> <span
+                    class="tag">/lock/how.html</span></p>
+            <p>Contoh URL:</p>
+            <ul>
+                <li>https://silverhawk.web.id/lock/lock.css</li>
+                <li>https://silverhawk.web.id/lock/lock.js</li>
+                <li>https://silverhawk.web.id/lock/how.html</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>2. Tempel ke File HTML</h2>
+            <p>Tambahkan CSS di dalam tag <code>&lt;head&gt;</code>.</p>
+            <pre><button class="btn copy" onclick="cp(this)">Copy</button><code>&lt;link rel="stylesheet" href="https://silverhawk.web.id/lock/lock.css"&gt;</code></pre>
+            <p>Tambahkan JS tepat sebelum tag <code>&lt;/body&gt;</code>.</p>
+            <pre><button class="btn copy" onclick="cp(this)">Copy</button><code>&lt;script src="https://silverhawk.web.id/lock/lock.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>3. Letak Baris yang Tepat</h2>
+            <ul>
+                <li><b>index.html</b> → sebelum <code>&lt;/head&gt;</code> untuk CSS</li>
+                <li><b>index.html</b> → sebelum <code>&lt;/body&gt;</code> untuk JS</li>
+                <li>Jika banyak halaman, tempel di semua file HTML</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>4. Contoh Lengkap</h2>
+            <pre><button class="btn copy" onclick="cp(this)">Copy</button><code>&lt;head&gt;
+  ...
+  &lt;link rel="stylesheet" href="https://silverhawk.web.id/lock/lock.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  ...isi website...
+  &lt;script src="https://silverhawk.web.id/lock/lock.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+
+        <div class="card">
+            <h2>5. Fitur yang Aktif</h2>
+            <ul>
+                <li>Blok klik kanan</li>
+                <li>Blok shortcut inspect tertentu</li>
+                <li>Floating Follow Us</li>
+                <li>Redirect promo random saat trigger</li>
+                <li>Watermark Silverhawk Network</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>6. Catatan</h2>
+            <p>Jika website memiliki fungsi klik kanan penting, gunakan versi lock yang lebih ringan atau whitelist
+                halaman tertentu.</p>
+            <p><a href="https://silverhawk.web.id" target="_blank">Powered by Silverhawk Network</a></p>
+        </div>
+    </div>
+    <script>
+        function cp(btn) { const txt = btn.parentElement.querySelector('code').innerText; navigator.clipboard.writeText(txt); btn.innerText = 'Copied'; setTimeout(() => btn.innerText = 'Copy', 1500) }
+    </script>
+</body>
+
+</html>

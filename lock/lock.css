@@ -1,0 +1,20 @@
+html {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+body::after {
+    content: "© Silverhawk Network";
+    position: fixed;
+    right: 8px;
+    bottom: 8px;
+    font-size: 11px;
+    opacity: .25;
+    z-index: 99999;
+    pointer-events: none;
+}
