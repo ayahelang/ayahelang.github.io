@@ -5,19 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Silverhawk Lock Guide</title>
+
     <link rel="stylesheet" href="https://silverhawk.web.id/lock/lock.css">
 
     <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             background: #0f172a;
             color: #e5e7eb;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         .wrap {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: auto;
             padding: 24px;
         }
@@ -28,7 +35,7 @@
             border-radius: 18px;
             padding: 22px;
             margin: 18px 0;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .24);
         }
 
         h1,
@@ -43,19 +50,23 @@
         pre {
             background: #f8fafc;
             color: #111827;
+            border: 1px solid #dbe2ea;
             border-radius: 14px;
             padding: 16px;
             overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
             position: relative;
-            border: 1px solid #dbe2ea;
         }
 
         code {
+            display: block;
+            padding-right: 90px;
             font-family: Consolas, monospace;
-            font-size: .95rem;
+            font-size: .94rem;
         }
 
-        button.copy {
+        .copy {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -78,6 +89,12 @@
             margin: 4px 6px 4px 0;
         }
 
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
         a {
             color: #38bdf8;
         }
@@ -86,13 +103,7 @@
             padding-left: 18px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        @media(max-width:800px) {
+        @media(max-width:860px) {
             .grid {
                 grid-template-columns: 1fr;
             }
@@ -106,29 +117,30 @@
 
         <h1>🔒 Silverhawk Lock Guide</h1>
         <p class="small">
-            Panduan penggunaan lock.js universal untuk semua website Anda.
+            Panduan lengkap penggunaan lock.js universal.
         </p>
 
         <div class="card">
-            <h2>1. File Wajib di Folder /lock/</h2>
+            <h2>1. File Wajib</h2>
 
             <p>
                 <span class="tag">lock.js</span>
                 <span class="tag">lock.css</span>
-                <span class="tag">how.html</span>
                 <span class="tag">panel.html</span>
+                <span class="tag">how.html</span>
             </p>
 
             <ul>
-                <li>https://silverhawk.web.id/lock/lock.js</li>
-                <li>https://silverhawk.web.id/lock/lock.css</li>
-                <li>https://silverhawk.web.id/lock/how.html</li>
-                <li>https://silverhawk.web.id/lock/panel.html</li>
+                <li>/lock/lock.js</li>
+                <li>/lock/lock.css</li>
+                <li>/lock/panel.html</li>
+                <li>/lock/how.html</li>
             </ul>
+
         </div>
 
         <div class="card">
-            <h2>2. Cara Pasang ke Website</h2>
+            <h2>2. Cara Pasang</h2>
 
             <p>Tempel di dalam &lt;head&gt;</p>
 
@@ -141,13 +153,18 @@
         </div>
 
         <div class="card">
-            <h2>3. Setting di Tag Body</h2>
+            <h2>3. Body Config (Opsional)</h2>
+
+            <p>
+                Jika tidak diisi, sistem otomatis pakai:
+                <b>mode ultimate</b> + sosial media default Anda.
+            </p>
 
             <pre><button class="copy" onclick="cp(this)">Copy</button><code>&lt;body
 data-shlock-mode="ultimate"
-data-shlock-domain="eyecare.silverhawk.web.id,localhost"
-data-shlock-brand="EyeCare"
-data-shlock-social="https://instagram.com/a,https://youtube.com/b"
+data-shlock-domain="mysite.com,localhost"
+data-shlock-brand="My Site"
+data-shlock-social="https://instagram.com/me"
 &gt;</code></pre>
 
         </div>
@@ -158,25 +175,25 @@ data-shlock-social="https://instagram.com/a,https://youtube.com/b"
             <div class="grid">
 
                 <div>
-                    <p><b>lite</b></p>
+                    <b>lite</b>
                     <ul>
                         <li>blok klik kanan</li>
-                        <li>blok shortcut inspect</li>
+                        <li>blok shortcut</li>
                         <li>watermark</li>
                     </ul>
                 </div>
 
                 <div>
-                    <p><b>normal</b></p>
+                    <b>normal</b>
                     <ul>
                         <li>fitur lite</li>
-                        <li>promo sosial random</li>
+                        <li>promo sosial</li>
                         <li>anti drag</li>
                     </ul>
                 </div>
 
                 <div>
-                    <p><b>aggressive</b></p>
+                    <b>aggressive</b>
                     <ul>
                         <li>fitur normal</li>
                         <li>anti iframe</li>
@@ -185,7 +202,7 @@ data-shlock-social="https://instagram.com/a,https://youtube.com/b"
                 </div>
 
                 <div>
-                    <p><b>ultimate</b></p>
+                    <b>ultimate</b>
                     <ul>
                         <li>semua fitur aktif</li>
                         <li>floating Follow Us</li>
@@ -195,20 +212,21 @@ data-shlock-social="https://instagram.com/a,https://youtube.com/b"
                 </div>
 
             </div>
+
         </div>
 
         <div class="card">
-            <h2>5. Fitur Lock System</h2>
+            <h2>5. Fitur Sistem</h2>
 
             <ul>
                 <li>Blok klik kanan</li>
                 <li>Blok F12 / Ctrl+Shift+I / Ctrl+U</li>
-                <li>Promo sosial media random</li>
+                <li>Redirect promo sosial random</li>
                 <li>Floating tombol Follow Us</li>
                 <li>Anti drag image</li>
-                <li>Anti select text (mode tertentu)</li>
+                <li>Anti select text</li>
                 <li>Detect DevTools</li>
-                <li>Domain lock</li>
+                <li>Domain Lock</li>
                 <li>Watermark Silverhawk Network</li>
                 <li>Centralized update system</li>
             </ul>
@@ -216,36 +234,26 @@ data-shlock-social="https://instagram.com/a,https://youtube.com/b"
         </div>
 
         <div class="card">
-            <h2>6. Generator Otomatis</h2>
+            <h2>6. Generator Visual</h2>
 
             <p>
-                Gunakan panel konfigurasi otomatis:
-            </p>
-
-            <p>
+                Gunakan panel otomatis:
                 <a href="panel.html">➡ Buka panel.html</a>
             </p>
 
         </div>
 
         <div class="card">
-            <h2>7. Contoh Full HTML</h2>
+            <h2>7. Default Sosial Media</h2>
 
-            <pre><button class="copy" onclick="cp(this)">Copy</button><code>&lt;head&gt;
-&lt;link rel="stylesheet" href="https://silverhawk.web.id/lock/lock.css"&gt;
-&lt;/head&gt;
-
-&lt;body
-data-shlock-mode="ultimate"
-data-shlock-domain="mysite.com,localhost"
-data-shlock-brand="My Site"
-data-shlock-social="https://instagram.com/me"
-&gt;
-
-...isi website...
-
-&lt;script src="https://silverhawk.web.id/lock/lock.js"&gt;&lt;/script&gt;
-&lt;/body&gt;</code></pre>
+            <ul>
+                <li>TikTok @enb.electronicsntools</li>
+                <li>TikTok @belajarsmm</li>
+                <li>YouTube @amateursreleased</li>
+                <li>Instagram @jameswhat.sgbva</li>
+                <li>Instagram @teddyskom63</li>
+                <li>Facebook /teddymulyana.sgbva</li>
+            </ul>
 
         </div>
 
@@ -253,9 +261,9 @@ data-shlock-social="https://instagram.com/me"
             <h2>8. Catatan</h2>
 
             <ul>
-                <li>Untuk aplikasi/tool gunakan mode lite atau normal.</li>
-                <li>Untuk landing page gunakan aggressive.</li>
-                <li>Untuk flagship project gunakan ultimate.</li>
+                <li>App/tool → lite / normal</li>
+                <li>Landing page → aggressive</li>
+                <li>Project utama → ultimate</li>
             </ul>
 
             <p>
@@ -271,10 +279,16 @@ data-shlock-social="https://instagram.com/me"
 
     <script>
         function cp(btn) {
-            const txt = btn.parentElement.querySelector("code").innerText;
+            const txt =
+                btn.parentElement.querySelector("code").innerText;
+
             navigator.clipboard.writeText(txt);
+
             btn.innerText = "Copied";
-            setTimeout(() => btn.innerText = "Copy", 1400);
+
+            setTimeout(() => {
+                btn.innerText = "Copy";
+            }, 1400);
         }
     </script>
 

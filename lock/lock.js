@@ -1,20 +1,38 @@
+/* =========================
+   FILE: /lock/lock.js
+   FINAL PACK V2
+========================= */
 (function () {
 
     const d = document.body.dataset;
 
-    const mode = d.shlockMode || "normal";
-    const brand = d.shlockBrand || "Protected";
+    /* ---------- DEFAULT CONFIG ---------- */
+    const mode = d.shlockMode || "ultimate";
+    const brand = d.shlockBrand || "Silverhawk Protected";
+
+    const defaultSocials = [
+        "https://www.tiktok.com/@enb.electronicsntools",
+        "https://www.tiktok.com/@belajarsmm",
+        "https://www.youtube.com/@amateursreleased",
+        "https://www.instagram.com/jameswhat.sgbva",
+        "https://www.instagram.com/teddyskom63",
+        "https://www.facebook.com/teddymulyana.sgbva/"
+    ];
 
     const domains = (d.shlockDomain || "")
-        .split(",").map(v => v.trim()).filter(Boolean);
+        .split(",")
+        .map(v => v.trim())
+        .filter(Boolean);
 
     const socials = (d.shlockSocial || "")
-        .split(",").map(v => v.trim()).filter(Boolean);
+        .trim()
+        ? d.shlockSocial.split(",").map(v => v.trim()).filter(Boolean)
+        : defaultSocials;
 
     let lastOpen = 0;
 
+    /* ---------- HELPERS ---------- */
     function pick() {
-        if (!socials.length) return null;
         return socials[Math.floor(Math.random() * socials.length)];
     }
 
@@ -24,7 +42,6 @@
         if (!el) {
             el = document.createElement("div");
             el.id = "__shlk_toast";
-
             el.style.cssText = `
 position: fixed;
 left: 50 %;
@@ -45,33 +62,31 @@ box - shadow: 0 10px 25px rgba(0, 0, 0, .25);
         el.textContent = msg;
         el.style.display = "block";
 
-        clearTimeout(el.t);
-        el.t = setTimeout(() => {
+        clearTimeout(el.timer);
+        el.timer = setTimeout(() => {
             el.style.display = "none";
         }, 2200);
     }
 
     function promo() {
         const now = Date.now();
-
         if (now - lastOpen < 15000) return;
 
-        const url = pick();
-        if (url) {
-            lastOpen = now;
-            window.open(url, "_blank", "noopener");
-        }
+        lastOpen = now;
+        window.open(pick(), "_blank", "noopener");
     }
 
+    /* ---------- DOMAIN LOCK ---------- */
     if (domains.length && !domains.includes(location.hostname)) {
-        document.body.innerHTML =
-            `< div style = "padding:40px;text-align:center;font-family:Arial" >
- <h1>Unauthorized Domain</h1>
- <p>${brand} hanya berjalan di domain resmi.</p>
+        document.body.innerHTML = `
+    < div style = "padding:40px;text-align:center;font-family:Arial" >
+   <h1>Unauthorized Domain</h1>
+   <p>${brand} hanya berjalan di domain resmi.</p>
  </div > `;
         throw new Error("blocked");
     }
 
+    /* ---------- RIGHT CLICK ---------- */
     document.addEventListener("contextmenu", e => {
         e.preventDefault();
         toast("Konten dilindungi");
@@ -79,6 +94,7 @@ box - shadow: 0 10px 25px rgba(0, 0, 0, .25);
         if (mode !== "lite") promo();
     });
 
+    /* ---------- SHORTCUT BLOCK ---------- */
     document.addEventListener("keydown", e => {
         const k = e.key.toUpperCase();
 
@@ -94,11 +110,13 @@ box - shadow: 0 10px 25px rgba(0, 0, 0, .25);
         }
     });
 
-    if (mode === "normal" || mode === "aggressive" || mode === "ultimate") {
+    /* ---------- NORMAL+ ---------- */
+    if (["normal", "aggressive", "ultimate"].includes(mode)) {
         document.addEventListener("dragstart", e => e.preventDefault());
     }
 
-    if (mode === "aggressive" || mode === "ultimate") {
+    /* ---------- AGGRESSIVE+ ---------- */
+    if (["aggressive", "ultimate"].includes(mode)) {
 
         if (window.top !== window.self) {
             document.body.innerHTML = "Embedding blocked";
@@ -115,15 +133,20 @@ box - shadow: 0 10px 25px rgba(0, 0, 0, .25);
         }, 1500);
     }
 
+    /* ---------- ULTIMATE ---------- */
     if (mode === "ultimate") {
+
         document.addEventListener("selectstart", e => e.preventDefault());
 
         const a = document.createElement("a");
-        a.href = pick() || "#";
+        a.href = pick();
         a.target = "_blank";
         a.className = "__shlk_follow_btn";
         a.innerHTML = "📣 Follow Us";
-        window.addEventListener("load", () => document.body.appendChild(a));
+
+        window.addEventListener("load", () => {
+            document.body.appendChild(a);
+        });
     }
 
 })();
