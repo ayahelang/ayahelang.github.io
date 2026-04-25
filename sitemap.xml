@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://silverhawk.web.id/</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-</urlset>
+<sitemapindex xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <sitemap>
+        <loc>https://silverhawk.web.id/sitemap-main.xml</loc>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://silverhawk.web.id/sitemap-subdomains.xml</loc>
+    </sitemap>
+
+    <sitemap>
+        <loc>https://silverhawk.web.id/sitemap-external.xml</loc>
+    </sitemap>
+
+</sitemapindex>
