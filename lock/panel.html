@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LOCK Control Panel</title>
+<style>
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#0f172a;color:#e5e7eb}
+.wrap{max-width:980px;margin:auto;padding:24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:#111827;border:1px solid #1f2937;border-radius:18px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.22)}
+h1,h2{margin:.2rem 0 1rem}.small{opacity:.75}
+label{display:block;margin:.8rem 0 .35rem;font-weight:700}
+input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid #334155;background:#0b1220;color:#fff}
+textarea{min-height:110px;resize:vertical}
+button{background:#0ea5e9;color:#fff;border:none;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer}
+button:hover{opacity:.95}
+pre{background:#020617;border:1px solid #334155;padding:16px;border-radius:14px;overflow:auto;position:relative}
+.copy{position:absolute;top:10px;right:10px}
+.badge{display:inline-block;background:#1d4ed8;padding:4px 10px;border-radius:999px;font-size:.82rem;margin-right:6px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🔒 LOCK CONTROL PANEL</h1>
+<p class="small">Generator konfigurasi lock.js universal Silverhawk Network.</p>
+<div class="grid">
+<div class="card">
+<h2>Config</h2>
+<label>Brand</label>
+<input id="brand" value="EyeCare">
+<label>Allowed Domains (pisahkan koma)</label>
+<input id="domains" value="eyecare.silverhawk.web.id,localhost,127.0.0.1">
+<label>Mode</label>
+<select id="mode">
+<option>lite</option>
+<option selected>ultimate</option>
+<option>normal</option>
+<option>aggressive</option>
+</select>
+<label>Social Links (1 per baris)</label>
+<textarea id="socials">https://www.instagram.com/jameswhat.sgbva
+https://www.youtube.com/@amateursreleased</textarea>
+<br><br>
+<button onclick="gen()">Generate Config</button>
+<button onclick="savePreset()">Save Preset</button>
+</div>
+<div class="card">
+<h2>Output</h2>
+<p><span class="badge">HEAD</span> Tempel di &lt;head&gt;</p>
+<pre><button class="copy" onclick="cp('headOut',this)">Copy</button><code id="headOut"></code></pre>
+<p><span class="badge">BODY</span> Tempel di tag &lt;body&gt;</p>
+<pre><button class="copy" onclick="cp('bodyOut',this)">Copy</button><code id="bodyOut"></code></pre>
+<p><span class="badge">FOOTER</span> Tempel sebelum &lt;/body&gt;</p>
+<pre><button class="copy" onclick="cp('footOut',this)">Copy</button><code id="footOut"></code></pre>
+</div>
+</div>
+<div class="card">
+<h2>Mode Info</h2>
+<p><b>lite</b> = proteksi ringan.</p>
+<p><b>normal</b> = ringan + promo sosial.</p>
+<p><b>aggressive</b> = + devtools detect + anti iframe.</p>
+<p><b>ultimate</b> = gabungan semua fitur terbaik.</p>
+</div>
+</div>
+<script>
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function gen(){
+ const brand=document.getElementById('brand').value.trim();
+ const domains=document.getElementById('domains').value.trim();
+ const mode=document.getElementById('mode').value;
+ const socials=document.getElementById('socials').value.split('\n').map(v=>v.trim()).filter(Boolean).join(',');
+ document.getElementById('headOut').innerHTML=esc('<link rel="stylesheet" href="https://silverhawk.web.id/lock/lock.css">');
+ document.getElementById('bodyOut').innerHTML=esc('<body data-shlock-mode="'+mode+'" data-shlock-domain="'+domains+'" data-shlock-brand="'+brand+'" data-shlock-social="'+socials+'">');
+ document.getElementById('footOut').innerHTML=esc('<script src="https://silverhawk.web.id/lock/lock.js"></script>');
+}
+function cp(id,btn){navigator.clipboard.writeText(document.getElementById(id).innerText);btn.innerText='Copied';setTimeout(()=>btn.innerText='Copy',1400)}
+function savePreset(){
+ localStorage.setItem('sh_brand',document.getElementById('brand').value);
+ localStorage.setItem('sh_domains',document.getElementById('domains').value);
+ localStorage.setItem('sh_mode',document.getElementById('mode').value);
+ localStorage.setItem('sh_socials',document.getElementById('socials').value);
+ alert('Preset saved');
+}
+window.onload=()=>{
+ if(localStorage.getItem('sh_brand')) document.getElementById('brand').value=localStorage.getItem('sh_brand');
+ if(localStorage.getItem('sh_domains')) document.getElementById('domains').value=localStorage.getItem('sh_domains');
+ if(localStorage.getItem('sh_mode')) document.getElementById('mode').value=localStorage.getItem('sh_mode');
+ if(localStorage.getItem('sh_socials')) document.getElementById('socials').value=localStorage.getItem('sh_socials');
+ gen();
+}
+</script>
+</body>
+</html>

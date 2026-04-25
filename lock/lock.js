@@ -1,30 +1,29 @@
 (function () {
 
-    const __shlk9x_links = [
-        "https://www.tiktok.com/@enb.electronicsntools",
-        "https://www.tiktok.com/@belajarsmm",
-        "https://www.youtube.com/@amateursreleased",
-        "https://www.instagram.com/jameswhat.sgbva",
-        "https://www.instagram.com/teddyskom63",
-        "https://www.facebook.com/teddymulyana.sgbva/"
-    ];
+    const d = document.body.dataset;
 
-    let __shlk9x_lastOpen = 0;
-    let __shlk9x_tryCount = 0;
+    const mode = d.shlockMode || "normal";
+    const brand = d.shlockBrand || "Protected";
 
-    function __shlk9x_pick() {
-        return __shlk9x_links[
-            Math.floor(Math.random() * __shlk9x_links.length)
-        ];
+    const domains = (d.shlockDomain || "")
+        .split(",").map(v => v.trim()).filter(Boolean);
+
+    const socials = (d.shlockSocial || "")
+        .split(",").map(v => v.trim()).filter(Boolean);
+
+    let lastOpen = 0;
+
+    function pick() {
+        if (!socials.length) return null;
+        return socials[Math.floor(Math.random() * socials.length)];
     }
 
-    function __shlk9x_toast(msg) {
-
-        let el = document.getElementById("__shlk9x_toast");
+    function toast(msg) {
+        let el = document.getElementById("__shlk_toast");
 
         if (!el) {
             el = document.createElement("div");
-            el.id = "__shlk9x_toast";
+            el.id = "__shlk_toast";
 
             el.style.cssText = `
 position: fixed;
@@ -36,87 +35,95 @@ color: #fff;
 padding: 10px 16px;
 border - radius: 12px;
 z - index: 999999;
-font - family: Arial;
+font - family: Arial, sans - serif;
 font - size: 14px;
-box - shadow: 0 10px 25px rgba(0, 0, 0, .25)
-    `;
-
+box - shadow: 0 10px 25px rgba(0, 0, 0, .25);
+`;
             document.body.appendChild(el);
         }
 
         el.textContent = msg;
         el.style.display = "block";
 
-        clearTimeout(el.__hideTimer);
-
-        el.__hideTimer = setTimeout(() => {
+        clearTimeout(el.t);
+        el.t = setTimeout(() => {
             el.style.display = "none";
         }, 2200);
     }
 
-    function __shlk9x_trigger(src) {
-
-        __shlk9x_tryCount++;
-
-        __shlk9x_toast("Konten dilindungi 😊");
-
+    function promo() {
         const now = Date.now();
 
-        if (now - __shlk9x_lastOpen > 15000) {
-            __shlk9x_lastOpen = now;
-            window.open(__shlk9x_pick(), "_blank", "noopener");
-        }
+        if (now - lastOpen < 15000) return;
 
-        console.log("LOCK:", src);
+        const url = pick();
+        if (url) {
+            lastOpen = now;
+            window.open(url, "_blank", "noopener");
+        }
     }
 
-    document.addEventListener("contextmenu", function (e) {
+    if (domains.length && !domains.includes(location.hostname)) {
+        document.body.innerHTML =
+            `< div style = "padding:40px;text-align:center;font-family:Arial" >
+ <h1>Unauthorized Domain</h1>
+ <p>${brand} hanya berjalan di domain resmi.</p>
+ </div > `;
+        throw new Error("blocked");
+    }
+
+    document.addEventListener("contextmenu", e => {
         e.preventDefault();
-        __shlk9x_trigger("rightclick");
+        toast("Konten dilindungi");
+
+        if (mode !== "lite") promo();
     });
 
-    document.addEventListener("keydown", function (e) {
-
+    document.addEventListener("keydown", e => {
         const k = e.key.toUpperCase();
 
         if (
             k === "F12" ||
-            (e.ctrlKey && e.shiftKey &&
-                ["I", "J", "C", "K"].includes(k)) ||
-            (e.ctrlKey &&
-                ["U", "S"].includes(k))
+            (e.ctrlKey && e.shiftKey && ["I", "J", "C", "K"].includes(k)) ||
+            (e.ctrlKey && ["U", "S"].includes(k))
         ) {
             e.preventDefault();
-            __shlk9x_trigger("shortcut");
-        }
+            toast("Shortcut diblokir");
 
+            if (mode === "ultimate") promo();
+        }
     });
 
-    document.addEventListener(
-        "dragstart",
-        e => e.preventDefault()
-    );
-
-    document.addEventListener(
-        "selectstart",
-        e => e.preventDefault()
-    );
-
-    function __shlk9x_makeBtn() {
-
-        const a = document.createElement("a");
-
-        a.href = __shlk9x_pick();
-        a.target = "_blank";
-        a.className = "__shlk9x_follow_btn";
-        a.innerHTML = "📣 Follow Us";
-
-        document.body.appendChild(a);
+    if (mode === "normal" || mode === "aggressive" || mode === "ultimate") {
+        document.addEventListener("dragstart", e => e.preventDefault());
     }
 
-    window.addEventListener(
-        "load",
-        __shlk9x_makeBtn
-    );
+    if (mode === "aggressive" || mode === "ultimate") {
+
+        if (window.top !== window.self) {
+            document.body.innerHTML = "Embedding blocked";
+        }
+
+        setInterval(() => {
+            const w = window.outerWidth - window.innerWidth > 160;
+            const h = window.outerHeight - window.innerHeight > 160;
+
+            if (w || h) {
+                document.body.innerHTML =
+                    "<div style='padding:40px;font-family:Arial'>Developer Tools Detected</div>";
+            }
+        }, 1500);
+    }
+
+    if (mode === "ultimate") {
+        document.addEventListener("selectstart", e => e.preventDefault());
+
+        const a = document.createElement("a");
+        a.href = pick() || "#";
+        a.target = "_blank";
+        a.className = "__shlk_follow_btn";
+        a.innerHTML = "📣 Follow Us";
+        window.addEventListener("load", () => document.body.appendChild(a));
+    }
 
 })();

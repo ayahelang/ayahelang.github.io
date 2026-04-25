@@ -1,39 +1,29 @@
-/* zero conflict lock */
-
 html {
-    -webkit-user-select: none;
-    user-select: none;
+    -webkit-user-select: auto;
+    user-select: auto;
 }
 
 img {
     -webkit-user-drag: none;
 }
 
-#__shlk9x_toast {
-    all: initial;
-}
-
-.__shlk9x_follow_btn {
+.__shlk_follow_btn {
     position: fixed !important;
     right: 14px !important;
     bottom: 70px !important;
     z-index: 999998 !important;
-
     background: #0ea5e9 !important;
     color: #fff !important;
-
     padding: 10px 14px !important;
     border-radius: 999px !important;
-
     text-decoration: none !important;
-    font-family: Arial !important;
+    font-family: Arial, sans-serif !important;
     font-size: 14px !important;
     font-weight: bold !important;
-
     box-shadow: 0 10px 25px rgba(0, 0, 0, .18) !important;
 }
 
-.__shlk9x_follow_btn:hover {
+.__shlk_follow_btn:hover {
     opacity: .92 !important;
 }
 
