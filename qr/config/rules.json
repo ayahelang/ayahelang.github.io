@@ -1,0 +1,64 @@
+[
+    {
+        "name":"Teaching",
+
+        "enabled":true,
+
+        "priority":100,
+
+        "days":[
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday"
+        ],
+
+        "start":"07:00",
+
+        "end":"10:00",
+
+        "plugin":"ads"
+    },
+
+    {
+        "name":"Driver",
+
+        "enabled":true,
+
+        "priority":50,
+
+        "days":[
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday"
+        ],
+
+        "start":"10:00",
+
+        "end":"23:59",
+
+        "plugin":"whatsapp"
+    },
+
+    {
+        "name":"Weekend",
+
+        "enabled":true,
+
+        "priority":50,
+
+        "days":[
+            "saturday",
+            "sunday"
+        ],
+
+        "start":"00:00",
+
+        "end":"23:59",
+
+        "plugin":"whatsapp"
+    }
+]
