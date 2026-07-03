@@ -1,113 +1,129 @@
-const page=document.getElementById("page");
+const page = document.getElementById("page");
 
 document
 .querySelectorAll("button[data-page]")
-.forEach(btn=>{
+.forEach(btn => {
 
-btn.onclick=()=>{
+    btn.onclick = () => {
 
-load(btn.dataset.page);
+        load(btn.dataset.page);
 
-};
+    };
 
 });
 
 function load(name){
 
-switch(name){
+    switch(name){
 
-case "dashboard":
+        case "dashboard":
 
-dashboard();
+            dashboard();
 
-break;
+            break;
 
-case "rules":
+        case "rules":
 
-rules();
+            rules();
 
-break;
+            break;
 
-case "plugins":
+        case "plugins":
 
-plugins();
+            plugins();
 
-break;
+            break;
 
-case "github":
+        case "github":
 
-github();
+            github();
 
-break;
+            break;
 
-case "preview":
+        case "preview":
 
-preview();
+            preview();
 
-break;
+            break;
+
+    }
 
 }
-
-}
-
-dashboard();
 
 function dashboard(){
 
-page.innerHTML=`
+    page.innerHTML = `
 
-<h2>
+        <h2>SilverQR CMS</h2>
 
-SilverQR CMS
+        <br>
 
-</h2>
+        <h3>Current Mode</h3>
 
-<br>
+        <select id="mode">
 
-<h3>
+            <option>AUTO</option>
 
-Current Mode
+            <option>DRIVER</option>
 
-</h3>
+            <option>TEACHING</option>
 
-<select id="mode">
+            <option>PROMOTION</option>
 
-<option>AUTO</option>
+        </select>
 
-<option>DRIVER</option>
+        <br><br>
 
-<option>TEACHING</option>
+        <button id="saveMode">
 
-<option>PROMOTION</option>
+            SAVE
 
-</select>
+        </button>
 
-<br><br>
+    `;
 
-<button id="saveMode">
+    const mode = Storage.load("mode","AUTO");
 
-SAVE
+    document.getElementById("mode").value = mode;
 
-</button>
+    document.getElementById("saveMode").onclick = () => {
 
-`;
+        Storage.save(
 
-document
-.getElementById("saveMode")
-.onclick=()=>{
+            "mode",
 
-Storage.save(
+            document.getElementById("mode").value
 
-"mode",
+        );
 
-document
-.getElementById("mode")
-.value
+        alert("Mode berhasil disimpan.");
 
-);
-
-alert("Saved");
-
-};
+    };
 
 }
+
+function rules(){
+
+    page.innerHTML="<h2>Rules (Coming Soon)</h2>";
+
+}
+
+function plugins(){
+
+    page.innerHTML="<h2>Plugins (Coming Soon)</h2>";
+
+}
+
+function github(){
+
+    page.innerHTML="<h2>GitHub (Coming Soon)</h2>";
+
+}
+
+function preview(){
+
+    page.innerHTML="<h2>Preview (Coming Soon)</h2>";
+
+}
+
+dashboard();
