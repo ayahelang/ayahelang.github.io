@@ -75,3 +75,4 @@ saya perlu tahu seberapa jauh dari saya.
     }
 
 }
+window.Plugin = Plugin;
