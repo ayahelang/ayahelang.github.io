@@ -44,7 +44,7 @@ function loadPage(name){
             break;
 
         case "github":
-            github();
+            githubPage();
             break;
 
         case "preview":
