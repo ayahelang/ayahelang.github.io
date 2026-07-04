@@ -63,3 +63,33 @@ flex:1;
 padding:30px;
 
 }
+
+.input{
+
+    width:100%;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    margin-top:6px;
+
+    font-size:15px;
+
+}
+
+button{
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    margin-right:10px;
+
+}
