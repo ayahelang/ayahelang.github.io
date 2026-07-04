@@ -75,3 +75,88 @@ function githubPage() {
     document.getElementById("btnTest").onclick = testGithub;
 
 }
+
+async function testGithub(){
+
+    const token =
+        document.getElementById("githubPAT").value;
+
+    const repo =
+        document.getElementById("githubRepo").value;
+
+    const branch =
+        document.getElementById("githubBranch").value;
+
+    GitHub.saveSetting(
+        token,
+        repo,
+        branch
+    );
+
+    const status =
+        document.getElementById("githubStatus");
+
+    status.innerHTML = "Testing...";
+
+    try{
+
+        const settings =
+            await GitHub.readJSON(
+                "qr/config/settings.json"
+            );
+
+        status.innerHTML = `
+
+        <div style="color:green">
+
+        ✅ Connected
+
+        <br><br>
+
+        Project :
+
+        ${settings.project}
+
+        <br>
+
+        Version :
+
+        ${settings.version}
+
+        </div>
+
+        `;
+
+    }
+    catch(e){
+
+        status.innerHTML = `
+
+        <div style="color:red">
+
+        ❌ ${e}
+
+        </div>
+
+        `;
+
+    }
+
+}
+
+function saveGithub(){
+
+    GitHub.saveSetting(
+
+        document.getElementById("githubPAT").value,
+
+        document.getElementById("githubRepo").value,
+
+        document.getElementById("githubBranch").value
+
+    );
+
+    alert("GitHub Setting Saved");
+
+}
+
