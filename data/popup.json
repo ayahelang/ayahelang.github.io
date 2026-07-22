@@ -1,0 +1,69 @@
+{
+  "enabled": true,
+
+  "version": "1.0",
+
+  "defaultDelay": 2000,
+
+  "defaultDuration": 30000,
+
+  "items": [
+
+    {
+      "id": "classroom",
+
+      "enabled": true,
+
+      "priority": 100,
+
+      "randomWeight": 100,
+
+      "showOncePerDay": true,
+
+      "start": "2026-07-01",
+
+      "end": "2026-12-31",
+
+      "days": [1,2,3,4,5],
+
+      "title": "📢 Informasi Siswi At-Taqwa",
+
+      "message": "Silakan melakukan registrasi Google Classroom sebelum mengikuti kegiatan pembelajaran.",
+
+      "button": "Registrasi Sekarang",
+
+      "url": "https://shorturl.at/LVQCg",
+
+      "image": "images/classroom.png",
+
+      "theme": "blue"
+    },
+
+    {
+      "id": "silverqr",
+
+      "enabled": true,
+
+      "priority": 10,
+
+      "randomWeight": 20,
+
+      "showOncePerDay": false,
+
+      "days": [0,6],
+
+      "title": "🚀 Silver QR",
+
+      "message": "Coba layanan QR Dinamis Silverhawk.",
+
+      "button": "Buka",
+
+      "url": "https://silverhawk.web.id/qr",
+
+      "image": "images/logo.png",
+
+      "theme": "silver"
+    }
+
+  ]
+}
