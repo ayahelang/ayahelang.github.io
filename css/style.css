@@ -720,24 +720,38 @@ body::after {
   bottom: 24px;
   left: 24px;
   z-index: 90;
-  background: rgba(15, 23, 42, 0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
   padding: 12px 16px;
   font-size: 0.78rem;
-  color: #94a3b8;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  color: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   min-width: 130px;
   line-height: 1.6;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+.float-stats:hover {
+  opacity: 1;
+  background: rgba(15, 23, 42, 0.92);
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
 }
 .fs-online {
   display: flex;
   align-items: center;
   gap: 6px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: inherit;
   margin-bottom: 4px;
+}
+.float-stats:hover .fs-online {
+  color: #e2e8f0;
 }
 .fs-dot {
   width: 8px;
@@ -746,20 +760,73 @@ body::after {
   background: #22c55e;
   box-shadow: 0 0 6px #22c55e;
   animation: fs-blink 1.5s infinite;
+  opacity: 0.6;
 }
+.float-stats:hover .fs-dot { opacity: 1; }
 @keyframes fs-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
 .fs-row strong {
-  color: #00f5ff;
+  color: rgba(0, 245, 255, 0.5);
   font-weight: 700;
 }
+.float-stats:hover .fs-row strong {
+  color: #00f5ff;
+}
+
+/* ---------- FLOATING AUTO-SCROLL TOGGLE ---------- */
+.float-autoscroll {
+  position: fixed;
+  bottom: 100px;
+  left: 24px;
+  z-index: 91;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(148, 163, 184, 0.55);
+  cursor: pointer;
+  opacity: 0.45;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.float-autoscroll:hover {
+  opacity: 1;
+  background: rgba(15, 23, 42, 0.92);
+  color: #94a3b8;
+  border-color: rgba(0, 245, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.float-autoscroll.active {
+  opacity: 0.85;
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.85), rgba(99, 102, 241, 0.85));
+  color: #0f172a;
+  border-color: transparent;
+}
+.float-autoscroll.active:hover {
+  opacity: 1;
+}
+.ast-icon { font-size: 0.95rem; line-height: 1; }
+
 @media (max-width: 480px) {
   .float-stats {
     font-size: 0.7rem;
     padding: 10px 12px;
     bottom: 16px;
     left: 12px;
+  }
+  .float-autoscroll {
+    bottom: 130px;
+    left: 12px;
+    padding: 7px 12px;
+    font-size: 0.7rem;
   }
 }

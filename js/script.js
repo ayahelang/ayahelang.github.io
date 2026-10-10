@@ -242,17 +242,53 @@
     removeHighlights();
   }
 
+  let aggressiveIdle = false; // false = 15–30s random, true = 5s
+  const AGGRESSIVE_IDLE_MS = 5000;
+
+  function randomIdleMs() {
+    return 15000 + Math.floor(Math.random() * 15001); // 15–30s
+  }
+
+  function currentIdleMs() {
+    return aggressiveIdle ? AGGRESSIVE_IDLE_MS : randomIdleMs();
+  }
+
   function resetIdle() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
       if (!autoActive) startShowcase();
-    }, 4500); // 4.5s idle → start
+    }, currentIdleMs());
   }
 
-  // User interaction stops & resets idle (no mousemove to avoid over-sensitivity)
-  const interactionEvents = ['click', 'touchstart', 'wheel', 'keydown', 'touchmove'];
+  // Floating toggle for aggressive auto-scroll
+  const autoToggle = document.getElementById('autoScrollToggle');
+  function updateAutoToggleUI() {
+    if (!autoToggle) return;
+    autoToggle.classList.toggle('active', aggressiveIdle);
+    autoToggle.setAttribute('aria-pressed', aggressiveIdle ? 'true' : 'false');
+    autoToggle.title = aggressiveIdle
+      ? 'Auto-scroll agresif ON (idle 5 dtk) — klik untuk matikan'
+      : 'Auto-scroll normal (idle 15–30 dtk) — klik untuk mode agresif 5 dtk';
+    const label = autoToggle.querySelector('.ast-label');
+    if (label) label.textContent = aggressiveIdle ? 'Auto 5s ON' : 'Auto scroll';
+  }
+  if (autoToggle) {
+    autoToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      aggressiveIdle = !aggressiveIdle;
+      updateAutoToggleUI();
+      stopShowcase();
+      resetIdle();
+    });
+    updateAutoToggleUI();
+  }
+
+  // User interaction stops & resets idle
+  const interactionEvents = ['click', 'touchstart', 'wheel', 'keydown', 'touchmove', 'mousemove'];
   interactionEvents.forEach(evt => {
-    window.addEventListener(evt, () => {
+    window.addEventListener(evt, (e) => {
+      // Ignore clicks on the toggle itself (handled above)
+      if (e.target && e.target.closest && e.target.closest('#autoScrollToggle')) return;
       stopShowcase();
       resetIdle();
     }, { passive: true });
@@ -454,21 +490,26 @@
       const d = new Date();
       return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
     }
+    function yearKey() {
+      return String(new Date().getFullYear());
+    }
 
     let stats;
     try { stats = JSON.parse(localStorage.getItem(KEY) || "{}"); }
     catch { stats = {}; }
 
-    const t = today(), w = weekKey(), m = monthKey();
+    const t = today(), w = weekKey(), m = monthKey(), y = yearKey();
     if (stats.dayKey !== t) { stats.day = 0; stats.dayKey = t; }
     if (stats.weekKey !== w) { stats.week = 0; stats.weekKey = w; }
     if (stats.monthKey !== m) { stats.month = 0; stats.monthKey = m; }
+    if (stats.yearKey !== y) { stats.year = 0; stats.yearKey = y; }
 
     const visitKey = "visited_" + t;
     if (!sessionStorage.getItem(visitKey)) {
       stats.day = (stats.day || 0) + 1;
       stats.week = (stats.week || 0) + 1;
       stats.month = (stats.month || 0) + 1;
+      stats.year = (stats.year || 0) + 1;
       sessionStorage.setItem(visitKey, "1");
       localStorage.setItem(KEY, JSON.stringify(stats));
     }
@@ -490,9 +531,11 @@
       const d = document.getElementById("fsDay");
       const wEl = document.getElementById("fsWeek");
       const mEl = document.getElementById("fsMonth");
+      const yEl = document.getElementById("fsYear");
       if (d) d.textContent = stats.day || 0;
       if (wEl) wEl.textContent = stats.week || 0;
       if (mEl) mEl.textContent = stats.month || 0;
+      if (yEl) yEl.textContent = stats.year || 0;
     }
 
     renderStats();
