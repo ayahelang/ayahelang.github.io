@@ -155,6 +155,40 @@
 
       <!-- MAIN WEBS -->
       <section class="content-section active" id="main-webs">
+        <!-- Internet Speed Test -->
+        <div class="speedtest-card" id="speedtestCard">
+          <div class="speedtest-header">
+            <h3>⚡ Internet Speed Test</h3>
+            <p>Uji kecepatan internet pengunjung — mirip speedtest.net</p>
+          </div>
+          <div class="speedtest-body">
+            <div class="speedtest-gauge">
+              <div class="speedtest-value" id="stValue">—</div>
+              <div class="speedtest-unit" id="stUnit">Mbps</div>
+              <div class="speedtest-label" id="stLabel">Siap diuji</div>
+            </div>
+            <div class="speedtest-metrics">
+              <div class="st-metric">
+                <span class="st-metric-label">Download</span>
+                <span class="st-metric-val" id="stDown">— Mbps</span>
+              </div>
+              <div class="st-metric">
+                <span class="st-metric-label">Upload</span>
+                <span class="st-metric-val" id="stUp">— Mbps</span>
+              </div>
+              <div class="st-metric">
+                <span class="st-metric-label">Ping</span>
+                <span class="st-metric-val" id="stPing">— ms</span>
+              </div>
+            </div>
+            <button type="button" class="speedtest-btn" id="stStartBtn">Mulai Speed Test</button>
+            <div class="speedtest-progress" id="stProgress" hidden>
+              <div class="st-bar"><div class="st-bar-fill" id="stBarFill"></div></div>
+              <span id="stProgressText">Mengukur…</span>
+            </div>
+          </div>
+        </div>
+
         <div class="cards">
           <div class="card">
             <h3>Web Gallery</h3>
@@ -410,7 +444,19 @@
             <a href="https://myrep.silverhawk.web.id/" target="_blank">
               <button>myRepublic</button>
             </a>
-          </div>        
+            <a href="https://boash.silverhawk.web.id" target="_blank">
+              <button>Borces</button>
+            </a>
+            <a href="https://quizit.silverhawk.web.id" target="_blank">
+              <button>QuizIT</button>
+            </a>
+            <a href="https://monmon.silverhawk.web.id" target="_blank">
+              <button>Monmon Games</button>
+            </a>
+            <a href="https://edugames.silverhawk.web.id" target="_blank">
+              <button>EduGames</button>
+            </a>
+          </div>
         </div>
       </section>      
 
