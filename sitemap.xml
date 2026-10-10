@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-
-    <sitemap>
-        <loc>https://silverhawk.web.id/sitemap-main.xml</loc>
-    </sitemap>
-
-    <sitemap>
-        <loc>https://silverhawk.web.id/sitemap-subdomains.xml</loc>
-    </sitemap>
-
-    <sitemap>
-        <loc>https://silverhawk.web.id/sitemap-external.xml</loc>
-    </sitemap>
-
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://silverhawk.web.id/sitemap-main.xml</loc>
+    <lastmod>2026-10-10</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://silverhawk.web.id/sitemap-subdomains.xml</loc>
+    <lastmod>2026-10-10</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://silverhawk.web.id/sitemap-external.xml</loc>
+    <lastmod>2026-10-10</lastmod>
+  </sitemap>
 </sitemapindex>
