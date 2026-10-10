@@ -4,7 +4,5 @@ Allow: /
 # Disallow internal/utility paths
 Disallow: /lock/
 Disallow: /qr/admin/
-Disallow: /hapus/
-Disallow: /resources/
 
 Sitemap: https://silverhawk.web.id/sitemap.xml

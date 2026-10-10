@@ -397,4 +397,72 @@
     });
   })();
 
+
+  // ---------- Visitor Stats (floating) ----------
+  (function initVisitorStats() {
+    const KEY = "sh_stats_v1";
+    const ONLINE_KEY = "sh_online";
+    const SESSION_ID = sessionStorage.getItem("sh_sid") || (Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
+    sessionStorage.setItem("sh_sid", SESSION_ID);
+
+    function today() {
+      const d = new Date();
+      return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    }
+    function weekKey() {
+      const d = new Date();
+      const onejan = new Date(d.getFullYear(), 0, 1);
+      const week = Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+      return d.getFullYear() + "-W" + week;
+    }
+    function monthKey() {
+      const d = new Date();
+      return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
+    }
+
+    let stats;
+    try { stats = JSON.parse(localStorage.getItem(KEY) || "{}"); }
+    catch { stats = {}; }
+
+    const t = today(), w = weekKey(), m = monthKey();
+    if (stats.dayKey !== t) { stats.day = 0; stats.dayKey = t; }
+    if (stats.weekKey !== w) { stats.week = 0; stats.weekKey = w; }
+    if (stats.monthKey !== m) { stats.month = 0; stats.monthKey = m; }
+
+    const visitKey = "visited_" + t;
+    if (!sessionStorage.getItem(visitKey)) {
+      stats.day = (stats.day || 0) + 1;
+      stats.week = (stats.week || 0) + 1;
+      stats.month = (stats.month || 0) + 1;
+      sessionStorage.setItem(visitKey, "1");
+      localStorage.setItem(KEY, JSON.stringify(stats));
+    }
+
+    function heartbeat() {
+      let online = {};
+      try { online = JSON.parse(localStorage.getItem(ONLINE_KEY) || "{}"); } catch {}
+      const now = Date.now();
+      Object.keys(online).forEach(id => {
+        if (now - online[id] > 45000) delete online[id];
+      });
+      online[SESSION_ID] = now;
+      localStorage.setItem(ONLINE_KEY, JSON.stringify(online));
+      const el = document.getElementById("fsOnline");
+      if (el) el.textContent = Object.keys(online).length;
+    }
+
+    function renderStats() {
+      const d = document.getElementById("fsDay");
+      const wEl = document.getElementById("fsWeek");
+      const mEl = document.getElementById("fsMonth");
+      if (d) d.textContent = stats.day || 0;
+      if (wEl) wEl.textContent = stats.week || 0;
+      if (mEl) mEl.textContent = stats.month || 0;
+    }
+
+    renderStats();
+    heartbeat();
+    setInterval(heartbeat, 15000);
+  })();
+
 })();
