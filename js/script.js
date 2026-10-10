@@ -327,6 +327,18 @@
       progressText.textContent = text;
     }
 
+    function setNeedle(mbps) {
+      const needle = document.getElementById("stNeedle");
+      const arc = document.getElementById("stArc");
+      const clamped = Math.max(0, Math.min(200, mbps || 0));
+      const deg = -90 + (clamped / 200) * 180;
+      if (needle) needle.style.transform = "translateX(-50%) rotate(" + deg + "deg)";
+      if (arc) {
+        const pct = (clamped / 200) * 100;
+        arc.style.strokeDasharray = pct + " 100";
+      }
+    }
+
     function xhrGet(url) {
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
@@ -388,6 +400,7 @@
           if (mbps > best) best = mbps;
           setProgress(15 + (i + 1) * 18, "Download… " + mbps.toFixed(1) + " Mbps");
           elVal.textContent = mbps.toFixed(1);
+          setNeedle(mbps);
         } catch (e) {
           console.warn("DL fail", e);
         }
@@ -411,6 +424,7 @@
             if (elapsed > 0.05) {
               const live = (loaded * 8 / elapsed) / 1e6;
               elVal.textContent = live.toFixed(1);
+              setNeedle(live);
               setProgress(70 + (i + 1) * 8, "Upload… " + live.toFixed(1) + " Mbps");
             }
           });
@@ -419,6 +433,7 @@
           if (mbps > best) best = mbps;
           setProgress(70 + (i + 1) * 8, "Upload… " + mbps.toFixed(1) + " Mbps");
           elVal.textContent = mbps.toFixed(1);
+          setNeedle(mbps);
         } catch (e) {
           console.warn("UL fail", e);
         }
@@ -430,6 +445,7 @@
       btn.disabled = true;
       progress.hidden = false;
       elVal.textContent = "…";
+      setNeedle(0);
       elLabel.textContent = "Mengukur…";
       elDown.textContent = "— Mbps";
       elUp.textContent = "— Mbps";
@@ -456,6 +472,7 @@
         setProgress(100, "Selesai!");
         elLabel.textContent = "Selesai";
         elVal.textContent = down.toFixed(1);
+        setNeedle(down);
       } catch (err) {
         console.error(err);
         elLabel.textContent = "Gagal";
@@ -471,7 +488,7 @@
 
   // ---------- Visitor Stats (floating) ----------
   (function initVisitorStats() {
-    const KEY = "sh_stats_v1";
+    const KEY = "sh_stats_v2";
     const ONLINE_KEY = "sh_online";
     const SESSION_ID = sessionStorage.getItem("sh_sid") || (Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
     sessionStorage.setItem("sh_sid", SESSION_ID);
@@ -504,13 +521,34 @@
     if (stats.monthKey !== m) { stats.month = 0; stats.monthKey = m; }
     if (stats.yearKey !== y) { stats.year = 0; stats.yearKey = y; }
 
+    // Migrate v1
+    try {
+      const old = JSON.parse(localStorage.getItem("sh_stats_v1") || "null");
+      if (old && !stats.total) {
+        stats.day = Math.max(stats.day || 0, old.day || 0);
+        stats.week = Math.max(stats.week || 0, old.week || 0);
+        stats.month = Math.max(stats.month || 0, old.month || 0);
+        stats.year = Math.max(stats.year || 0, old.year || 0, old.month || 0, old.week || 0, old.day || 0);
+        stats.total = Math.max(stats.total || 0, stats.year);
+      }
+    } catch {}
+
+    stats.total = stats.total || 0;
+    stats.year = Math.max(stats.year || 0, stats.month || 0, stats.week || 0, stats.day || 0);
+    stats.total = Math.max(stats.total, stats.year);
+
     const visitKey = "visited_" + t;
     if (!sessionStorage.getItem(visitKey)) {
       stats.day = (stats.day || 0) + 1;
       stats.week = (stats.week || 0) + 1;
       stats.month = (stats.month || 0) + 1;
       stats.year = (stats.year || 0) + 1;
+      stats.total = (stats.total || 0) + 1;
+      stats.year = Math.max(stats.year, stats.month);
+      stats.total = Math.max(stats.total, stats.year);
       sessionStorage.setItem(visitKey, "1");
+      localStorage.setItem(KEY, JSON.stringify(stats));
+    } else {
       localStorage.setItem(KEY, JSON.stringify(stats));
     }
 
@@ -528,14 +566,17 @@
     }
 
     function renderStats() {
-      const d = document.getElementById("fsDay");
-      const wEl = document.getElementById("fsWeek");
-      const mEl = document.getElementById("fsMonth");
-      const yEl = document.getElementById("fsYear");
-      if (d) d.textContent = stats.day || 0;
-      if (wEl) wEl.textContent = stats.week || 0;
-      if (mEl) mEl.textContent = stats.month || 0;
-      if (yEl) yEl.textContent = stats.year || 0;
+      const map = {
+        fsDay: stats.day || 0,
+        fsWeek: stats.week || 0,
+        fsMonth: stats.month || 0,
+        fsYear: stats.year || 0,
+        fsTotal: stats.total || 0
+      };
+      Object.keys(map).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = map[id];
+      });
     }
 
     renderStats();
