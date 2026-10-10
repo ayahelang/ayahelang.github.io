@@ -328,15 +328,45 @@
     }
 
     function setNeedle(mbps) {
-      const needle = document.getElementById("stNeedle");
+      const needleG = document.getElementById("stNeedleG");
       const arc = document.getElementById("stArc");
-      const clamped = Math.max(0, Math.min(200, mbps || 0));
+      const clamped = Math.max(0, Math.min(200, Number(mbps) || 0));
       const deg = -90 + (clamped / 200) * 180;
-      if (needle) needle.style.transform = "translateX(-50%) rotate(" + deg + "deg)";
+      if (needleG) {
+        needleG.setAttribute("transform", "translate(100,100) rotate(" + deg + ")");
+      }
       if (arc) {
         const pct = (clamped / 200) * 100;
-        arc.style.strokeDasharray = pct + " 100";
+        arc.setAttribute("stroke-dasharray", pct + " 100");
       }
+    }
+
+    const stFloat = document.getElementById("stFloat");
+    const stToggle = document.getElementById("stFloatToggle");
+    const stClose = document.getElementById("stFloatClose");
+    let collapseTimer = null;
+
+    function openSt() {
+      if (!stFloat) return;
+      stFloat.classList.add("open");
+      clearTimeout(collapseTimer);
+    }
+    function closeSt() {
+      if (!stFloat) return;
+      stFloat.classList.remove("open");
+      clearTimeout(collapseTimer);
+    }
+    function scheduleCollapse() {
+      clearTimeout(collapseTimer);
+      collapseTimer = setTimeout(closeSt, 15000);
+    }
+
+    if (stToggle) stToggle.addEventListener("click", (e) => { e.stopPropagation(); openSt(); });
+    if (stClose) stClose.addEventListener("click", (e) => { e.stopPropagation(); closeSt(); });
+    const panel = document.getElementById("stFloatPanel");
+    if (panel) {
+      panel.addEventListener("mousemove", () => clearTimeout(collapseTimer));
+      panel.addEventListener("touchstart", () => clearTimeout(collapseTimer), { passive: true });
     }
 
     function xhrGet(url) {
@@ -444,6 +474,8 @@
     btn.addEventListener("click", async () => {
       btn.disabled = true;
       progress.hidden = false;
+      openSt();
+      clearTimeout(collapseTimer);
       elVal.textContent = "…";
       setNeedle(0);
       elLabel.textContent = "Mengukur…";
@@ -473,6 +505,7 @@
         elLabel.textContent = "Selesai";
         elVal.textContent = down.toFixed(1);
         setNeedle(down);
+        scheduleCollapse();
       } catch (err) {
         console.error(err);
         elLabel.textContent = "Gagal";

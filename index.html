@@ -155,45 +155,6 @@
 
       <!-- MAIN WEBS -->
       <section class="content-section active" id="main-webs">
-        <!-- Internet Speed Test -->
-        <div class="speedtest-card speedtest-compact" id="speedtestCard">
-          <div class="speedtest-body">
-            <div class="speedtest-gauge" id="stGauge">
-              <svg class="gauge-svg" viewBox="0 0 120 70" aria-hidden="true">
-                <path class="gauge-track" d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke-width="8" stroke-linecap="round"/>
-                <path class="gauge-arc" id="stArc" d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke-width="8" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
-              </svg>
-              <div class="gauge-needle" id="stNeedle"></div>
-              <div class="gauge-center">
-                <div class="speedtest-value" id="stValue">—</div>
-                <div class="speedtest-unit" id="stUnit">Mbps</div>
-              </div>
-              <div class="speedtest-label" id="stLabel">Siap diuji</div>
-            </div>
-            <div class="speedtest-side">
-              <div class="speedtest-metrics">
-                <div class="st-metric">
-                  <span class="st-metric-label">Download</span>
-                  <span class="st-metric-val" id="stDown">— Mbps</span>
-                </div>
-                <div class="st-metric">
-                  <span class="st-metric-label">Upload</span>
-                  <span class="st-metric-val" id="stUp">— Mbps</span>
-                </div>
-                <div class="st-metric">
-                  <span class="st-metric-label">Ping</span>
-                  <span class="st-metric-val" id="stPing">— ms</span>
-                </div>
-              </div>
-              <button type="button" class="speedtest-btn" id="stStartBtn">Mulai Speed Test</button>
-              <div class="speedtest-progress" id="stProgress" hidden>
-                <div class="st-bar"><div class="st-bar-fill" id="stBarFill"></div></div>
-                <span id="stProgressText">Mengukur…</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="cards">
           <div class="card">
             <h3>Web Gallery</h3>
@@ -622,6 +583,51 @@
   </div>
   <div class="parallax-bg"></div>
   <div class="overlay" id="overlay"></div>
+
+
+  <!-- Floating Speed Test -->
+  <div class="st-float" id="stFloat" title="Speed Test">
+    <button type="button" class="st-float-toggle" id="stFloatToggle" aria-label="Buka Speed Test">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="st-float-panel" id="stFloatPanel">
+      <button type="button" class="st-float-close" id="stFloatClose" aria-label="Tutup">×</button>
+      <div class="st-gauge-wrap">
+        <svg class="st-gauge-svg" viewBox="0 0 200 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="stGradSh" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00f5ff"/>
+              <stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="12" stroke-linecap="round"/>
+          <path id="stArc" d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="url(#stGradSh)" stroke-width="12" stroke-linecap="round"
+                pathLength="100" stroke-dasharray="0 100"/>
+          <g id="stNeedleG" transform="translate(100,100) rotate(-90)">
+            <line x1="0" y1="0" x2="0" y2="-68" stroke="#00f5ff" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="0" cy="0" r="7" fill="#00f5ff" stroke="#0f172a" stroke-width="2"/>
+          </g>
+        </svg>
+        <div class="st-gauge-readout">
+          <span class="st-val" id="stValue">—</span>
+          <span class="st-unit" id="stUnit">Mbps</span>
+          <span class="st-lbl" id="stLabel">Siap</span>
+        </div>
+      </div>
+      <div class="st-metrics">
+        <div class="st-m"><span>↓</span> <strong id="stDown">—</strong></div>
+        <div class="st-m"><span>↑</span> <strong id="stUp">—</strong></div>
+        <div class="st-m"><span>⏱</span> <strong id="stPing">—</strong></div>
+      </div>
+      <button type="button" class="st-play" id="stStartBtn" aria-label="Mulai">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="st-progress" id="stProgress" hidden>
+        <div class="st-bar"><div class="st-bar-fill" id="stBarFill"></div></div>
+        <span id="stProgressText"></span>
+      </div>
+    </div>
+  </div>
 
   <!-- Floating auto-scroll toggle -->
   <button type="button" class="float-autoscroll" id="autoScrollToggle" aria-pressed="false" title="Auto-scroll normal (idle 15–30 dtk) — klik untuk mode agresif 5 dtk">
