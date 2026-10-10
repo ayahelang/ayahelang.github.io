@@ -1,0 +1,252 @@
+/* =====================================================
+   Silverhawk Popup System v1.0
+   https://silverhawk.web.id
+===================================================== */
+
+:root{
+    --popup-width:380px;
+    --popup-radius:22px;
+
+    --silver1:#ffffff;
+    --silver2:#f5f7fa;
+    --silver3:#e8edf3;
+
+    --primary:#1976d2;
+    --primary-hover:#0d5fb5;
+
+    --text:#202124;
+    --text-light:#5f6368;
+
+    --shadow:0 20px 50px rgba(0,0,0,.25);
+
+    --transition:.35s;
+}
+
+#sh-popup-overlay{
+
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+
+    background:rgba(0,0,0,.35);
+
+    backdrop-filter:blur(5px);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:all .4s ease;
+
+    z-index:999999;
+
+    padding:25px;
+
+}
+
+#sh-popup-overlay.show{
+
+    opacity:1;
+    visibility:visible;
+
+}
+
+#sh-popup{
+
+    width:100%;
+    max-width:var(--popup-width);
+
+    background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.96),
+    rgba(247,248,250,.96));
+
+    border-radius:var(--popup-radius);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    transform:translateY(80px);
+
+    transition:.45s;
+
+    border:1px solid rgba(255,255,255,.5);
+
+    animation:none;
+
+}
+
+#sh-popup-overlay.show #sh-popup{
+
+    transform:translateY(0);
+
+}
+
+.sh-popup-header{
+
+    padding:18px 22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:linear-gradient(
+    135deg,
+    #1d8cf8,
+    #4dabff);
+
+    color:#fff;
+
+}
+
+.sh-popup-title{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+.sh-popup-close{
+
+    cursor:pointer;
+
+    font-size:26px;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:.25s;
+
+}
+
+.sh-popup-close:hover{
+
+    background:rgba(255,255,255,.2);
+
+}
+
+.sh-popup-body{
+
+    padding:24px;
+
+}
+
+.sh-popup-message{
+
+    color:var(--text-light);
+
+    line-height:1.7;
+
+    font-size:16px;
+
+}
+
+.sh-popup-button{
+
+    display:block;
+
+    margin-top:25px;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    background:linear-gradient(
+    135deg,
+    var(--primary),
+    #42a5f5);
+
+    color:#fff;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.sh-popup-button:hover{
+
+    transform:translateY(-2px);
+
+    background:var(--primary-hover);
+
+}
+
+.sh-popup-footer{
+
+    padding:12px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#888;
+
+    background:#fafafa;
+
+}
+
+.sh-popup-progress{
+
+    height:4px;
+
+    background:#d7d7d7;
+
+}
+
+.sh-popup-progress-bar{
+
+    height:100%;
+
+    width:100%;
+
+    background:#1d8cf8;
+
+    transition:width linear;
+
+}
+
+/* HP */
+
+@media(max-width:600px){
+
+#sh-popup{
+
+max-width:100%;
+
+}
+
+.sh-popup-title{
+
+font-size:18px;
+
+}
+
+.sh-popup-body{
+
+padding:20px;
+
+}
+
+}

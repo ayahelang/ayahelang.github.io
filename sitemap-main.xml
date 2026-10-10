@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://silverhawk.web.id/</loc>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://silverhawk.web.id/mediakit.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://silverhawk.web.id/tos.html</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://silverhawk.web.id/CV-Ted.pdf</loc>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://silverhawk.web.id/skripkeren/</loc>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>
